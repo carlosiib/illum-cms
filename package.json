@@ -18,7 +18,7 @@
     "he": "1.2.0",
     "lodash.camelcase": "4.3.0",
     "lodash.startcase": "4.4.0",
-    "next": "11.1.2",
+    "next": "^12.0.2",
     "next-mdx-remote": "3.0.7",
     "next-seo": "4.28.1",
     "react": "17.0.2",
