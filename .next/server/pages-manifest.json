@@ -1,6 +1,15 @@
 {
+  "/[slug]": "pages/[slug].js",
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
+  "/api/exit-preview": "pages/api/exit-preview.js",
+  "/api/preview": "pages/api/preview.js",
+  "/blog/[slug]": "pages/blog/[slug].js",
+  "/blog": "pages/blog.js",
+  "/": "pages/index.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js"
+  "/en/404": "pages/en/404.html",
+  "/de/404": "pages/de/404.html",
+  "/en/500": "pages/en/500.html",
+  "/de/500": "pages/de/500.html"
 }
