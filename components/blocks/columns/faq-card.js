@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/react'
-import { MDXRemote } from 'next-mdx-remote'
 
-export default function FAQCard({ content, title }) {
+export default function FAQCard({ title, contentFaq }) {
   return (
     <div>
       <Box
@@ -14,7 +13,7 @@ export default function FAQCard({ content, title }) {
         {title}
       </Box>
       <Box as="dd" mt={2} className="prose">
-        <MDXRemote {...content.mdx} />
+        <div dangerouslySetInnerHTML={{ __html: contentFaq.html }}></div>
       </Box>
     </div>
   )

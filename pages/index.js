@@ -5,6 +5,7 @@ import { parsePageData } from '@/utils/_parsePageData'
 import Wrapper from '@/components/wrapper'
 
 export default function IndexPage({ page }) {
+  console.log("home page", page)
   return <Wrapper {...page} />
 }
 

@@ -1,9 +1,8 @@
 import { Flex, Box } from '@chakra-ui/react'
-import { MDXRemote } from 'next-mdx-remote'
-
 import { CheckIcon } from '@/icons'
 
-export default function FeatureCheck({ content, title }) {
+export default function FeatureCheck({ title, contentFeature }) {
+  //console.log(contentFeature)
   return (
     <Flex>
       <Box
@@ -25,7 +24,7 @@ export default function FeatureCheck({ content, title }) {
           {title}
         </Box>
         <Box as="dd" mt={2} className="prose">
-          <MDXRemote {...content.mdx} />
+          <div dangerouslySetInnerHTML={{ __html: contentFeature.html }}></div>
         </Box>
       </Box>
     </Flex>

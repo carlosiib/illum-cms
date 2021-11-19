@@ -1,5 +1,4 @@
 import { Box, Flex, Heading } from '@chakra-ui/react'
-import { MDXRemote } from 'next-mdx-remote'
 
 export default function StatSection({
   columns,
@@ -7,6 +6,7 @@ export default function StatSection({
   gridTitle,
   ...props
 }) {
+  //console.log(gridSubtitle)
   if (!(columns || columns.length)) return null
 
   return (
@@ -26,7 +26,7 @@ export default function StatSection({
             )}
             {gridSubtitle && (
               <Box mt={[3, 4]} mx="auto" className="prose prose-xl">
-                <MDXRemote {...gridSubtitle.mdx} />
+                <div dangerouslySetInnerHTML={{ __html: gridSubtitle.markdown }}></div>
               </Box>
             )}
           </Box>

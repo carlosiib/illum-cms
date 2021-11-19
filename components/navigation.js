@@ -27,7 +27,8 @@ const transitionStyles = {
   exited: { transform: 'scale(0.95)', opacity: 0, visibility: 'hidden' }
 }
 
-export default function Navigation({ pages }) {
+export default function Navigation({ pages, buttons }) {
+  //console.log(buttons)
   const container = useRef(null)
   const router = useRouter()
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
@@ -69,7 +70,7 @@ export default function Navigation({ pages }) {
   }, [router.events])
 
   return (
-    <Box ref={container} pos="relative" bg="white" boxShadow="base">
+    <Box ref={container} pos="relative" bg="white" boxShadow="base" className="b-1">
       <Transition in={mobileNavOpen} timeout={150}>
         {(state) => (
           <Box
@@ -147,7 +148,7 @@ export default function Navigation({ pages }) {
                             >
                               {page.navigationLabel ||
                                 page.slug.charAt(0).toUpperCase() +
-                                  page.slug.slice(1)}
+                                page.slug.slice(1)}
                             </Text>
                           </ChakraLink>
                         </Link>
@@ -209,6 +210,7 @@ export default function Navigation({ pages }) {
                 return (
                   <Link key={page.id} href={`/${page.slug}`} passHref>
                     <ChakraLink
+                      className="b-1"
                       fontSize="md"
                       fontWeight="medium"
                       color={isActive ? 'indigo.600' : 'gray.500'}
@@ -218,6 +220,32 @@ export default function Navigation({ pages }) {
                     >
                       {page.navigationLabel ||
                         page.slug.charAt(0).toUpperCase() + page.slug.slice(1)}
+                    </ChakraLink>
+                  </Link>
+                )
+              })}
+            </Stack>
+          )}
+          {buttons && buttons.length && (
+            <Stack
+              as="nav"
+              display={['none', null, 'flex']}
+              direction="row"
+              spacing={10}
+            >
+              {buttons.map((button) => {
+                return (
+                  <Link key={button.id} href={`${button.href}`} passHref>
+                    <ChakraLink
+                      className="b-1"
+                      fontSize="md"
+                      fontWeight="medium"
+                      color={'gray.500'}
+                      _hover={{
+                        color: 'gray.900'
+                      }}
+                    >
+                      {button.label}
                     </ChakraLink>
                   </Link>
                 )

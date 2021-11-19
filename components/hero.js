@@ -1,6 +1,5 @@
 import { Box, Heading, Stack } from '@chakra-ui/react'
 import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote'
 
 import Button from '@/components/button'
 import Navigation from '@/components/navigation'
@@ -38,7 +37,8 @@ export default function Hero({ buttons, image, navigation, page }) {
                 maxW={['md', null, '3xl']}
                 mx="auto"
               >
-                <MDXRemote {...page.subtitle.mdx} />
+                <div dangerouslySetInnerHTML={{ __html: page.subtitle.markdown }}></div>
+
               </Box>
             )}
             {buttons && (

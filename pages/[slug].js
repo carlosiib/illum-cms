@@ -7,6 +7,7 @@ import { parsePageData } from '@/utils/_parsePageData'
 import Wrapper from '@/components/wrapper'
 
 export default function Page({ page }) {
+  console.log("NOT HOME PAGE", page)
   return <Wrapper {...page} />
 }
 
@@ -25,6 +26,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
   }
 
   const parsedPageData = await parsePageData(page)
+
 
   return {
     props: {

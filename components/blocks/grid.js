@@ -1,5 +1,4 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
-import { MDXRemote } from 'next-mdx-remote'
 
 import * as Columns from '@/columns'
 import { DotsSVG } from '@/svgs'
@@ -73,12 +72,11 @@ export default function Grid({
             {gridSubtitle && (
               <Box
                 mt={4}
-                maxW="2xl"
-                fontSize="xl"
+                fontSize="lg"
                 color="gray.500"
                 mx={{ lg: 'auto' }}
               >
-                <MDXRemote {...gridSubtitle.mdx} />
+                <div dangerouslySetInnerHTML={{ __html: gridSubtitle.markdown }}></div>
               </Box>
             )}
           </Box>
@@ -98,13 +96,13 @@ export default function Grid({
             {children
               ? children()
               : columns.map((column) => {
-                  const Component =
-                    Columns[columnComponent] || Columns[column.__typename]
+                const Component =
+                  Columns[columnComponent] || Columns[column.__typename]
 
-                  if (!Component) return null
+                if (!Component) return null
 
-                  return <Component key={column.id} {...column} />
-                })}
+                return <Component key={column.id} {...column} />
+              })}
           </Stack>
         </Box>
       </Box>

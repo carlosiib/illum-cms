@@ -1,5 +1,4 @@
 import { Box, Container, Heading } from '@chakra-ui/react'
-import { MDXRemote } from 'next-mdx-remote'
 
 import { getSiteLayout } from '@/layout'
 import Hero from '@/components/hero'
@@ -8,6 +7,7 @@ import Navigation from '@/components/navigation'
 import SEO from '@/components/seo'
 
 export default function PageLayout({ children, page }) {
+  console.log(page)
   const pageBanner = page?.marketing?.find(
     (block) => block.__typename === 'Banner'
   )
@@ -52,7 +52,7 @@ export default function PageLayout({ children, page }) {
                   lineHeight="tall"
                   fontSize="xl"
                 >
-                  <MDXRemote {...page.subtitle.mdx} />
+                  <div dangerouslySetInnerHTML={{ __html: page.subtitle.markdown }}></div>
                 </Container>
               )}
             </Box>

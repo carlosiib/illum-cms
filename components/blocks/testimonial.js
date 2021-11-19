@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react'
 import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote'
 
 import { DotsSVG } from '@/svgs'
 import { SlashIcon } from '@/icons'
 
 export default function Testimonial({ content, person }) {
+  //console.log("content", content)
   if (!person) return null
 
   return (
@@ -41,7 +41,7 @@ export default function Testimonial({ content, person }) {
               fontWeight="medium"
               color="gray.900"
             >
-              <MDXRemote {...content.mdx} />
+              <div dangerouslySetInnerHTML={{ __html: content.markdown }}></div>
             </Box>
             <Box as="footer" mt={8}>
               <Box

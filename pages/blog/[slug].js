@@ -10,7 +10,6 @@ import {
 import NextLink from 'next/link'
 import Image from 'next/image'
 import { gql } from 'graphql-request'
-import { MDXRemote } from 'next-mdx-remote'
 
 import { blogPostQuery } from '@/lib/_queries'
 import { getContentLayout } from '@/layout'
@@ -128,7 +127,7 @@ export default function BlogPost({ nextPost, post, previousPost }) {
               </Box>
             )}
             <Box maxW="none" pt={10} pb={8} color="gray.500" className="prose">
-              <MDXRemote {...post.content.mdx} />
+              <div dangerouslySetInnerHTML={{ __html: post.contentBlog.html }}></div>
             </Box>
           </Box>
           <Box
@@ -238,6 +237,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
   const previousPost = allPosts[postIndex - 1] || null
 
   const parsedPostData = await parsePostData(post)
+  console.log("POST data", post)
 
   return {
     props: {
