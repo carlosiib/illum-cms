@@ -1,10 +1,10 @@
-const description = `Learn how to build modern marketing websites, with localization and SEO, using GraphCMS, NextJS, Chakra UI, and Vercel.`
-const title = `Build Modern Marketing Websites with a Headless CMS`
-const url = `https://marketing-websites.withheadlesscms.com`
+const description = `Notebooks as a service for LMS systems`
+const title = `ILLUMIDESK`
+const url = `https://illum-cms.netlify.app/`
 
 const seo = {
   title,
-  titleTemplate: '%s | GraphCMS',
+  titleTemplate: '',
   description,
   openGraph: {
     description,
@@ -13,8 +13,8 @@ const seo = {
     url
   },
   twitter: {
-    handle: '@GraphCMS',
-    site: '@GraphCMS'
+    handle: '@Illumidesk',
+    site: '@Illumidesk'
   }
 }
 
