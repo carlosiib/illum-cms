@@ -3,8 +3,9 @@ import { CheckIcon } from '@/icons'
 
 export default function FeatureCheck({ title, contentFeature }) {
   //console.log(contentFeature)
+  //feature page
   return (
-    <Flex>
+    <Flex className="b-3">
       <Box
         as={CheckIcon}
         flexShrink="0"

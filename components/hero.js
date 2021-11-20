@@ -1,5 +1,4 @@
 import { Box, Heading, Stack, Center } from '@chakra-ui/react'
-import Image from 'next/image'
 
 import Button from '@/components/button'
 import Navigation from '@/components/navigation'

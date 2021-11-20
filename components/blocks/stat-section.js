@@ -10,7 +10,7 @@ export default function StatSection({
   if (!(columns || columns.length)) return null
 
   return (
-    <Box bg="gray.50" pt={[12, 16]}>
+    <Box bg="gray.50" pt={[12, 16]} className="b-1">
       {(gridTitle || gridSubtitle) && (
         <Box maxW="7xl" mx="auto" px={[4, 6, null, 8]}>
           <Box maxW="4xl" mx="auto" textAlign="center">

@@ -175,7 +175,7 @@ export default function Navigation({ pages, buttons }) {
             <Link href="/">
               <a>
                 <VisuallyHidden>GraphCMS</VisuallyHidden>
-                <Box as={LogoSVG} h={10} color="indigo.600" w="auto" />
+                <Box as={LogoSVG} h={12} color="indigo.600" w="auto" />
               </a>
             </Link>
           </Flex>
