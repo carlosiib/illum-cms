@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Heading, Box, Flex, Center } from '@chakra-ui/layout'
 
 export default function AcademyPath({ academyPath }) {
+  console.log(academyPath)
   const [currentPath, setCurrentPath] = useState("Instructors")
   const [path, setPath] = useState(null)
 
@@ -20,62 +21,59 @@ export default function AcademyPath({ academyPath }) {
   return (
     <Box my={12}>
       <Box as="section" maxW="7xl" mx="auto" className="b-2">
-        <Flex justify={"space-around"}>
-          <button
-            className="path-btn"
-            onClick={() => setCurrentPath("Content Managers")}>
-            Content Managers
-          </button>
-          <button
-            className="path-btn"
-            onClick={() => setCurrentPath("Learners")}>
-            Learners
-          </button>
-          <button
-            className="path-btn"
-            onClick={() => setCurrentPath("Instructors")}>
-            Instructors
-          </button>
+        <Flex justify={"space-around"} direction={'row-reverse'}>
+          {academyPath && academyPath.length &&
+            (
+              academyPath.map(path =>
+              (<button
+                className="path-btn"
+                onClick={() => setCurrentPath(`${path.reference}`)}>
+                {path.reference}
+              </button>))
+            )
+          }
         </Flex>
         {path && path.length &&
           (
             path.map(p => (
-              <div key={p.id} className="path-container">
-                <Flex justify={'space-between'}>
-                  <Box w={'70%'}>
-                    <Heading as="h3" mb={6}>{p.title}</Heading>
-                    <Flex>
-                      <Box mr={12} w={'40%'}>
-                        <img src={p.firstImage.url} alt={p.title} width="98" height="100" loading="lazy" />
-                        <p>{p.firstSubtitle}</p>
-                        <p>{p.firstDescription}</p>
-                        <Link href={p.firstHrefLink}>
-                          <a target="_blank"
-                            rel="noreferrer">
-                            {p.firstHrefLabel}
-                          </a>
-                        </Link>
-                      </Box>
-                      <Box w={'40%'}>
-                        <img src={p.secondImage.url} alt={p.title} width="98" height="100" loading="lazy" />
-                        <p>{p.secondSubtitle}</p>
-                        <p>{p.secondDescription}</p>
-                      </Box>
-                    </Flex>
-                  </Box>
-                  <Box w={'30%'}>
-                    <Center>
-                      <img
-                        src={p.mainImage.url}
-                        alt={p.for}
-                        loading="lazy"
-                        width="280"
-                        height="420"
-                      />
-                    </Center>
-                  </Box>
-                </Flex>
-              </div>
+              <Box key={p.id}>
+                <Box className="path-container">
+                  <Flex justify={'space-between'}>
+                    <Box w={'70%'}>
+                      <Heading as="h3" mb={6}>{p.title}</Heading>
+                      <Flex>
+                        <Box mr={12} w={'40%'}>
+                          <img src={p.firstImage.url} alt={p.title} width="98" height="100" loading="lazy" />
+                          <p>{p.firstSubtitle}</p>
+                          <p>{p.firstDescription}</p>
+                          <Link href={p.firstHrefLink}>
+                            <a target="_blank"
+                              rel="noreferrer">
+                              {p.firstHrefLabel}
+                            </a>
+                          </Link>
+                        </Box>
+                        <Box w={'40%'}>
+                          <img src={p.secondImage.url} alt={p.title} width="98" height="100" loading="lazy" />
+                          <p>{p.secondSubtitle}</p>
+                          <p>{p.secondDescription}</p>
+                        </Box>
+                      </Flex>
+                    </Box>
+                    <Box w={'30%'}>
+                      <Center>
+                        <img
+                          src={p.mainImage.url}
+                          alt={p.for}
+                          loading="lazy"
+                          width="280"
+                          height="420"
+                        />
+                      </Center>
+                    </Box>
+                  </Flex>
+                </Box>
+              </Box>
             ))
           )
         }
