@@ -26,6 +26,7 @@ export default function AcademyPath({ academyPath }) {
             (
               academyPath.map(path =>
               (<button
+                key={path.id}
                 className="path-btn"
                 onClick={() => setCurrentPath(`${path.reference}`)}>
                 {path.reference}
