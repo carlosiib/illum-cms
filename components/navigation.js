@@ -237,12 +237,11 @@ export default function Navigation({ pages, buttons }) {
                 return (
                   <Link key={button.id} href={`${button.href}`} passHref>
                     <ChakraLink
-                      className="b-1"
+                      className="anchor-link"
                       fontSize="md"
                       fontWeight="medium"
-                      color={'gray.500'}
                       _hover={{
-                        color: 'gray.900'
+                        color: 'white'
                       }}
                     >
                       {button.label}

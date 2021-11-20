@@ -29,7 +29,7 @@ export default function AcademyPath({ academyPath }) {
                 key={path.id}
                 className="path-btn"
                 onClick={() => setCurrentPath(`${path.reference}`)}>
-                {path.reference}
+                For {path.reference}
               </button>))
             )
           }

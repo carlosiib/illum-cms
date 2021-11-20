@@ -72,6 +72,28 @@
   color: var(--black-color);
 }
 
+/* FREE TRIAL */
+.free-trial-container {
+  text-align: center;
+  color: var(--black-color);
+}
+
+.free-trial-container p {
+  margin-bottom: 2rem;
+}
+
+.free-trial-container a {
+  padding: 8px 2rem;
+}
+
+.anchor-link {
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border-radius: var(--b-radius);
+  box-shadow: var(--btn-shadow);
+  text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
   .hero-container {
     margin-top: 2rem !important;

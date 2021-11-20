@@ -7,7 +7,7 @@ export default function Hero({ buttons, image, navigation, page }) {
   return (
     <Box >
       <Navigation {...navigation} />
-      <Box as="main" className="b-2 hero-container" maxW="7xl" mx="auto" mt={16}>
+      <Box as="main" className="b-2 hero-container" maxW="7xl" mx="auto" mt={4}>
         <Center>
           <Box px={[6, 12]} pr={{ xl: 16 }}>
             <Heading
