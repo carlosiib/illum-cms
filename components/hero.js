@@ -29,7 +29,6 @@ export default function Hero({ buttons, image, navigation, page }) {
                 mx="auto"
               >
                 <Heading as="h2" dangerouslySetInnerHTML={{ __html: page.subtitle.markdown }}></Heading>
-
               </Box>
             )}
             {buttons && (
@@ -61,6 +60,7 @@ export default function Hero({ buttons, image, navigation, page }) {
           alt={image.title}
           title={image.title}
           layout="fill"
+          loading="lazy"
         />
       </Box>
     </Box >
