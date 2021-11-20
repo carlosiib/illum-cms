@@ -10,7 +10,7 @@ export default function FreeTrial({
   // Rename prop otherwise duplicated prop name error -> CMS schema names  
 
   return (
-    <Box as="section" maxW="7xl" mx="auto" my={12} className="free-trial-container">
+    <Box maxW="7xl" mx="auto" my={12} className="free-trial-container">
       <Heading as="h4" mb={6}>{freeTrialTitle}</Heading>
       <p>{freeTrialSubtitle}</p>
       <Link href={freeTrialHrefLink}>
