@@ -1,4 +1,4 @@
-import { Box, Heading, Stack } from '@chakra-ui/react'
+import { Box, Heading, Stack, Center } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import Button from '@/components/button'
@@ -6,19 +6,11 @@ import Navigation from '@/components/navigation'
 
 export default function Hero({ buttons, image, navigation, page }) {
   return (
-    <Box position="relative" bg="gray.50">
+    <Box bg="gray.50" >
       <Navigation {...navigation} />
-      <Box as="main" position={{ lg: 'relative' }}>
-        <Box
-          mx="auto"
-          maxW="7xl"
-          w="full"
-          py={{ lg: 48 }}
-          pt={16}
-          pb={20}
-          textAlign={{ base: 'center', lg: 'left' }}
-        >
-          <Box px={[4, 8]} pr={{ xl: 16 }} width={{ lg: '50%' }}>
+      <Box as="main" className="b-2 hero-container" maxW="7xl" mx="auto" mt={16}>
+        <Center>
+          <Box px={[6, 12]} pr={{ xl: 16 }}>
             <Heading
               as="h1"
               fontSize={['4xl', '5xl', '6xl', '5xl', '6xl']}
@@ -64,26 +56,14 @@ export default function Hero({ buttons, image, navigation, page }) {
               </Stack>
             )}
           </Box>
-        </Box>
-        <Box
-          pos={{ base: 'relative', lg: 'absolute' }}
-          w={{ base: 'full', lg: '50%' }}
-          h={[64, 72, 96, 'full']}
-          top={{ lg: 0 }}
-          bottom={{ lg: 0 }}
-          right={{ lg: 0 }}
-        >
-          <Image
-            className="hero-image"
-            src={image.url}
-            alt={image.title}
-            title={image.title}
-            layout="fill"
-            priority={true}
-            objectFit="cover"
-          />
-        </Box>
+        </Center>
+        <img
+          src={image.url}
+          alt={image.title}
+          title={image.title}
+          layout="fill"
+        />
       </Box>
-    </Box>
+    </Box >
   )
 }

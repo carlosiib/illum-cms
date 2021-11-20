@@ -5,8 +5,11 @@ import startCase from 'lodash.startcase'
 import * as Icons from '@/icons'
 
 export default function FeatureIcon({ icon, title }) {
+  //console.log(icon)
   const IconComponent =
     Icons[`${startCase(camelCase(icon))}Icon`] || Icons.DefaultIcon
+
+  //console.log(IconComponent)
 
   return (
     <div>

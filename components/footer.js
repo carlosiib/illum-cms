@@ -87,7 +87,7 @@ export default function Footer({ primaryLinks, secondaryLinks }) {
         Footer
       </VisuallyHidden>
 
-      <Box maxW="7xl" mx="auto" py={{ base: 12, lg: 16 }} px={[4, 6, null, 8]}>
+      <Box maxW="7xl" mx="auto" py={{ base: 12, lg: 16 }} px={[4, 6, null, 8]} className="b-2">
         <Box
           pb={8}
           display={{ xl: 'grid' }}
