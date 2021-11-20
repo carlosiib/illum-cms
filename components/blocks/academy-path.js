@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import { Box, Flex } from "@chakra-ui/layout"
+import { useState, useEffect } from 'react'
+import { Box, Flex } from '@chakra-ui/layout'
 
-export default function academyPath({ academyPath }) {
+export default function AcademyPath({ academyPath }) {
   const [currentPath, setCurrentPath] = useState("ckw75rqgwbuy70d27ftwx93xk")
   const [path, setPath] = useState(null)
   //console.log(academyPath)
@@ -10,14 +10,12 @@ export default function academyPath({ academyPath }) {
   //Content Managers  "ckw763vywbx5u0d27aw38j84u"
 
   //crear en shcmema prop FOR = instructors,contentmanagers, leanres
-  //filter
-  function filterByPath() {
-  }
 
   useEffect(() => {
     const filter = academyPath.filter(path => path.id === currentPath)
     console.log(filter)
     setPath(filter)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPath])
 
 
@@ -25,7 +23,6 @@ export default function academyPath({ academyPath }) {
 
   return (
     <Box bg="gray.50" >
-
       <Box as="section" maxW="7xl" mx="auto" className="b-2">
         <Flex justify={"space-between"}>
           <button onClick={() => setCurrentPath("ckw75rqgwbuy70d27ftwx93xk")}>instructors</button>
