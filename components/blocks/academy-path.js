@@ -2,17 +2,11 @@ import { useState, useEffect } from 'react'
 import { Box, Flex } from '@chakra-ui/layout'
 
 export default function AcademyPath({ academyPath }) {
-  const [currentPath, setCurrentPath] = useState("ckw75rqgwbuy70d27ftwx93xk")
+  const [currentPath, setCurrentPath] = useState("Instructors")
   const [path, setPath] = useState(null)
-  //console.log(academyPath)
-  //instructors  "ckw75rqgwbuy70d27ftwx93xk"
-  //Learners  "ckw75zik8bw6d0d276zmprc5g"
-  //Content Managers  "ckw763vywbx5u0d27aw38j84u"
-
-  //crear en shcmema prop FOR = instructors,contentmanagers, leanres
 
   useEffect(() => {
-    const filter = academyPath.filter(path => path.id === currentPath)
+    const filter = academyPath.filter(path => path.reference === currentPath)
     console.log(filter)
     setPath(filter)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,9 +19,9 @@ export default function AcademyPath({ academyPath }) {
     <Box bg="gray.50" >
       <Box as="section" maxW="7xl" mx="auto" className="b-2">
         <Flex justify={"space-between"}>
-          <button onClick={() => setCurrentPath("ckw75rqgwbuy70d27ftwx93xk")}>instructors</button>
-          <button onClick={() => setCurrentPath("ckw75zik8bw6d0d276zmprc5g")}>Learners</button>
-          <button onClick={() => setCurrentPath("ckw763vywbx5u0d27aw38j84u")}>Content Manager</button>
+          <button onClick={() => setCurrentPath("Content Managers")}>Content Managers</button>
+          <button onClick={() => setCurrentPath("Learners")}>Learners</button>
+          <button onClick={() => setCurrentPath("Instructors")}>Instructors</button>
         </Flex>
         {path && path.length &&
           (
