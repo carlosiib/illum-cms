@@ -5,7 +5,7 @@ import Navigation from '@/components/navigation'
 
 export default function Hero({ buttons, image, navigation, page }) {
   return (
-    <Box bg="gray.50" >
+    <Box >
       <Navigation {...navigation} />
       <Box as="main" className="b-2 hero-container" maxW="7xl" mx="auto" mt={16}>
         <Center>
@@ -22,13 +22,13 @@ export default function Hero({ buttons, image, navigation, page }) {
             </Heading>
             {page.subtitle && (
               <Box
-                className="prose prose-lg sm:prose-xl"
+                className="prose"
                 mt={[3, null, 5]}
                 w="full"
                 maxW={['md', null, '3xl']}
                 mx="auto"
               >
-                <div dangerouslySetInnerHTML={{ __html: page.subtitle.markdown }}></div>
+                <Heading as="h2" dangerouslySetInnerHTML={{ __html: page.subtitle.markdown }}></Heading>
 
               </Box>
             )}

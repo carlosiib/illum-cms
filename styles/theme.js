@@ -75,7 +75,7 @@ export const theme = extendTheme({
   styles: {
     global: {
       'html, body': {
-        color: 'gray.500'
+        color: 'white'
       },
       'ul, ol': {
         listStyle: 'none'

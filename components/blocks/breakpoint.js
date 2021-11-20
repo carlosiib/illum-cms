@@ -4,9 +4,9 @@ import Button from '@/components/button'
 
 export default function Breakpoint({ buttons, subtitle, title }) {
   if (!(buttons || buttons.length)) return null
-
+  //why graph cms - there several reason
   return (
-    <Box bg="white">
+    <Box bg="white" >
       <Box maxW="7xl" mx="auto" py={[12, null, 16, 20]} px={[4, 6, null, 8]}>
         <Heading
           as="h2"

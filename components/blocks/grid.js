@@ -19,9 +19,10 @@ export default function Grid({
 
   const stackLayout = layout === 'STACK'
   const splitLayout = layout === 'SPLIT'
-
+  //show your best features
+  // frequently ask questions 
   return (
-    <Box overflow="hidden" bg={theme === 'LIGHT' ? 'gray.50' : 'white'}>
+    <Box overflow="hidden" bg={theme === 'LIGHT' ? 'gray.50' : 'white'} className="b-3">
       <Box pos="relative" maxW="7xl" mx="auto" py={12} px={[4, 6, null, 8]}>
         {splitLayout && (
           <Box

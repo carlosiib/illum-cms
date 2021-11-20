@@ -1,3 +1,13 @@
+:root {
+  --primary-color: #52b56b;
+  --secondary-color: #3f85ca;
+  --third-color: #ecebf3;
+  --white-color: #fff;
+  --black-color: #000;
+  --b-radius: 4px;
+  --btn-shadow: 0 1px 4px rgb(26 26 67 / 10%);
+}
+
 .avatar {
   border-radius: 50%;
 }
@@ -41,6 +51,25 @@
 
 .hero-container img {
   width: 50%;
+}
+
+/*ACADEMY PATH */
+.path-btn {
+  color: var(--white-color);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 8px 12px;
+  width: 25%;
+  background-color: var(--primary-color);
+}
+
+.path-container {
+  background-color: var(--third-color);
+  border-radius: 8px 8px 0 0;
+  padding: 2rem 1.2rem;
+  color: var(--black-color);
 }
 
 @media (max-width: 768px) {
