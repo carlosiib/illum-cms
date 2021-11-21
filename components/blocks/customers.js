@@ -1,5 +1,5 @@
 
-import { Box, Heading } from "@chakra-ui/layout";
+import { Box, Heading, Flex } from "@chakra-ui/layout";
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
@@ -10,7 +10,7 @@ export default function Customers({ heading, customerContents }) {
     autoplay: {
       delay: 2000,
     },
-    slidesPerView: 3,
+    slidesPerView: 6,
     spaceBetween: 0,
     pagination: false,
     navigation: false,
@@ -31,7 +31,7 @@ export default function Customers({ heading, customerContents }) {
 
       // when window width is >= 640px
       992: {
-        slidesPerView: 3,
+        slidesPerView: 6,
       },
     },
   };
@@ -42,14 +42,16 @@ export default function Customers({ heading, customerContents }) {
       </Heading>
       <Box>
         <Swiper {...swiperOption}>
-          {customerContents &&
-            (
-              customerContents.map(({ imageTitle, image }) =>
-                <SwiperSlide key={imageTitle}>
-                  <img src={image.url} width="100" height="100" alt={imageTitle} />
-                </SwiperSlide>
-              )
-            )}
+          <Flex justifyContent={'center'} alignItems={'center'}>
+            {customerContents &&
+              (
+                customerContents.map(({ imageTitle, image }) =>
+                  <SwiperSlide key={imageTitle}>
+                    <img src={image.url} width="100" height="100" alt={imageTitle} loading="lazy" />
+                  </SwiperSlide>
+                )
+              )}
+          </Flex>
         </Swiper>
       </Box>
     </Box>
