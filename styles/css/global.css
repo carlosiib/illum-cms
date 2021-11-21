@@ -133,6 +133,15 @@
   border: 1px solid black;
 }
 
+/* CUSTOMERS */
+.customers-container {
+  color: var(--black-color);
+}
+
+.customers-container {
+  text-align: center;
+}
+
 /* UTILS */
 .anchor-link {
   color: var(--white-color);

@@ -19,12 +19,13 @@
     "he": "1.2.0",
     "lodash.camelcase": "4.3.0",
     "lodash.startcase": "4.4.0",
-    "next": "11.0.1",
+    "next": "12.0.2",
     "next-seo": "4.28.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-intersection-observer": "^8.32.3",
-    "react-transition-group": "4.4.2"
+    "react-transition-group": "4.4.2",
+    "swiper": "7.2.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",
