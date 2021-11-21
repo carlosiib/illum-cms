@@ -95,6 +95,12 @@
   position: relative;
 }
 
+.skew-container {
+  position: sticky;
+  top: 20%;
+  z-index: 10%;
+}
+
 .secondary-img {
   position: absolute;
   width: 32%;
@@ -119,10 +125,12 @@
 
 .left-description {
   padding-right: 4rem;
+  border: 1px solid black;
 }
 
 .right-description {
   padding-left: 4rem;
+  border: 1px solid black;
 }
 
 /* UTILS */
