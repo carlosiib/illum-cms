@@ -8,9 +8,6 @@ import SEO from '@/components/seo'
 
 export default function PageLayout({ children, page }) {
   console.log(page)
-  const pageBanner = page?.marketing?.find(
-    (block) => block.__typename === 'Banner'
-  )
 
   const pageNewsletter = page?.marketing?.find(
     (block) => block.__typename === 'Newsletter'
@@ -19,8 +16,6 @@ export default function PageLayout({ children, page }) {
   return (
     <>
       {page?.seo && <SEO {...page.seo} />}
-
-      {pageBanner && <Marketing.Banner {...pageBanner} />}
 
       {page?.hero ? (
         <Hero {...page.hero} navigation={page.navigation} page={page} />
