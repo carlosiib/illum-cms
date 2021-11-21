@@ -1,11 +1,9 @@
 import {
   Box,
   Heading,
-  List,
   VisuallyHidden,
   Link,
-  Stack,
-  HStack
+  Stack
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import Image from 'next/image'
@@ -68,46 +66,6 @@ export default function BlogPost({ nextPost, post, previousPost }) {
           gridTemplateRows="auto 1fr"
           gridColumnGap={6}
         >
-          <Box as="dl" pt={{ base: 6, lg: '44px' }} pb={10}>
-            <VisuallyHidden as="dt">Author</VisuallyHidden>
-            <Box as="dd">
-              <List
-                display={{ base: 'flex', lg: 'block' }}
-                justifyContent="center"
-              >
-                {post.authors.map((author) => (
-                  <HStack
-                    key={author.id}
-                    display="flex"
-                    alignItems="center"
-                    spacing={2}
-                  >
-                    <Box w={10} h={10} pos="relative">
-                      <Image
-                        className="avatar"
-                        src={author.photo.url}
-                        alt={author.name}
-                        title={author.name}
-                        layout="fill"
-                      />
-                    </Box>
-                    <Box
-                      as="dl"
-                      flex="1 1 0"
-                      fontSize="sm"
-                      fontWeight="medium"
-                      lineHeight="5"
-                    >
-                      <VisuallyHidden as="dt">Name</VisuallyHidden>
-                      <Box as="dd" color="gray.900">
-                        {author.name}
-                      </Box>
-                    </Box>
-                  </HStack>
-                ))}
-              </List>
-            </Box>
-          </Box>
           <Box
             pb={{ lg: 0 }}
             gridColumn="span 3 / span 3"

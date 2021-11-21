@@ -4,7 +4,6 @@ import Image from 'next/image'
 import startCase from 'lodash.startcase'
 
 export default function BlogPostCard({
-  authors,
   category,
   coverImage,
   excerpt,
@@ -13,7 +12,6 @@ export default function BlogPostCard({
   slug,
   title
 }) {
-  const [primaryAuthor, ...secondaryAuthors] = authors
 
   return (
     <Flex flexDir="column" borderRadius="lg" boxShadow="lg" overflow="hidden">
@@ -60,46 +58,7 @@ export default function BlogPostCard({
           </NextLink>
         </Box>
         <Flex alignItems="center" mt={6}>
-          <Stack
-            direction="row"
-            display="flex"
-            spacing={-2}
-            pos="relative"
-            zIndex="0"
-            overflow="hidden"
-          >
-            {authors.map((author) => {
-              return (
-                <Box
-                  key={author.id}
-                  display="inline-block"
-                  w={9}
-                  h={9}
-                  pos="relative"
-                  borderRadius="full"
-                  border="2px solid white"
-                >
-                  <Image
-                    className="avatar"
-                    src={author.photo.url}
-                    alt={author.name}
-                    title={author.name}
-                    layout="fill"
-                  />
-                </Box>
-              )
-            })}
-          </Stack>
           <Box ml={3}>
-            <Text fontSize="sm" fontWeight="medium" color="gray.900">
-              {primaryAuthor?.name ?? 'No author'}
-
-              {secondaryAuthors && secondaryAuthors.length > 0 && (
-                <Text as="span" ml={1}>
-                  + {Number(secondaryAuthors.length)} other
-                </Text>
-              )}
-            </Text>
             <Stack
               display="flex"
               direction="row"
