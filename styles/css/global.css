@@ -296,6 +296,10 @@ h6 {
   text-transform: uppercase;
 }
 
+/* FOOTER */
+.footer-grid-col:not(:last-child) {
+  padding-right: 2rem;
+}
 /* UTILS */
 .anchor-link {
   color: var(--white-color) !important;

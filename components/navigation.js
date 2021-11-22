@@ -14,7 +14,6 @@ import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { Transition } from 'react-transition-group'
 
-import { LogoSVG, MarkSVG } from '@/svgs'
 import { MenuIcon, XIcon } from '@/icons'
 
 const defaultStyle = {
@@ -70,6 +69,7 @@ export default function Navigation({ pages, buttons }) {
     return () => router.events.off('routeChangeStart', handleRouteChange)
   }, [router.events])
 
+  // Mobile Navbar
   return (
     <Box ref={container} pos="relative" bg="white" boxShadow="base" className="b-1">
       <Transition in={mobileNavOpen} timeout={150}>
@@ -97,8 +97,14 @@ export default function Navigation({ pages, buttons }) {
                 <div>
                   <Link href="/">
                     <a>
-                      <VisuallyHidden>GraphCMS</VisuallyHidden>
-                      <Box as={MarkSVG} h={8} w="auto" color="indigo.600" />
+                      <VisuallyHidden>Illumidesk</VisuallyHidden>
+                      <img
+                        src="/logos/primary.svg"
+                        alt="Illumidesk LLC"
+                        width="140"
+                        height="40"
+                        loading="lazy"
+                      />
                     </a>
                   </Link>
                 </div>
@@ -135,17 +141,13 @@ export default function Navigation({ pages, buttons }) {
                             display="flex"
                             alignItems="center"
                             borderRadius="md"
-                            color={isActive ? 'indigo.600' : 'inherit'}
-                            _hover={{
-                              bg: 'gray.50'
-                            }}
+                            color={isActive ? 'var(--primary-color)' : 'var(--black-color)'}
                           >
                             <Text
                               as="span"
                               ml={3}
                               fontSize="md"
                               fontWeight="medium"
-                              color="gray.900"
                             >
                               {page.navigationLabel ||
                                 page.slug.charAt(0).toUpperCase() +
@@ -163,7 +165,8 @@ export default function Navigation({ pages, buttons }) {
         )}
       </Transition>
 
-      <Box maxW="7xl" mx="auto" px={[4, 6]}>
+      {/* DESKTOP NAVBAR */}
+      <Box maxW="7xl" mx="auto" px={[4, 6]} className="b-1">
         <Stack
           display="flex"
           justifyContent={['space-between', null, 'flex-start']}
@@ -175,8 +178,14 @@ export default function Navigation({ pages, buttons }) {
           <Flex w={{ lg: 0 }} flex={{ lg: '1 1 0' }}>
             <Link href="/">
               <a>
-                <VisuallyHidden>Illumidesk</VisuallyHidden>
-                <Box as={LogoSVG} h={12} color="indigo.600" w="auto" />
+                <VisuallyHidden>Illumidesk LLC</VisuallyHidden>
+                <img
+                  src="/logos/primary.svg"
+                  alt="Illumidesk LLC"
+                  width="198"
+                  height="80"
+                  loading="lazy"
+                />
               </a>
             </Link>
           </Flex>
@@ -198,12 +207,14 @@ export default function Navigation({ pages, buttons }) {
               <Box as={MenuIcon} w={6} h={6} aria-hidden="true" />
             </Button>
           </Box>
+
           {pages && pages.length && (
             <Stack
               as="nav"
               display={['none', null, 'flex']}
               direction="row"
               spacing={10}
+              paddingTop={8}
             >
               {pages.map((page) => {
                 const isActive = router.asPath.startsWith(`/${page.slug}`)
@@ -211,12 +222,13 @@ export default function Navigation({ pages, buttons }) {
                 return (
                   <Link key={page.id} href={`/${page.slug}`} passHref>
                     <ChakraLink
-                      className="b-1"
-                      fontSize="md"
-                      fontWeight="medium"
-                      color={isActive ? 'indigo.600' : 'gray.500'}
+                      fontSize="1rem"
+                      fontWeight="700"
+                      letterSpacing="1.1px"
+                      color={isActive ? 'var(--primary-color)' : 'var(--black-color)'}
                       _hover={{
-                        color: 'gray.900'
+                        textDecor: 'none',
+                        color: "var(--primary-color)"
                       }}
                     >
                       {page.navigationLabel ||
@@ -233,6 +245,10 @@ export default function Navigation({ pages, buttons }) {
               display={['none', null, 'flex']}
               direction="row"
               spacing={10}
+              paddingTop={8}
+              fontSize="1rem"
+              fontWeight="700"
+              letterSpacing="1.1px"
             >
               {buttons.map((button) => {
                 return (
