@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Heading, Box, Flex, Center } from '@chakra-ui/layout'
 
-export default function AcademyPath({ academyPath }) {
+export default function AcademyPath({ title, academyPath }) {
   console.log(academyPath)
   const [currentPath, setCurrentPath] = useState("Instructors")
   const [path, setPath] = useState(null)
@@ -21,6 +21,12 @@ export default function AcademyPath({ academyPath }) {
   return (
     <Box my={12}>
       <Box as="section" maxW="7xl" mx="auto" className="b-2">
+        <Flex justifyContent={'flex-end'} mr={'calc(100% / 4)'}>
+          <button className="anchor-link path-main-btn">{title}</button>
+        </Flex>
+        <Box>
+          SVGS
+        </Box>
         <Flex justify={"space-around"} direction={'row-reverse'}>
           {academyPath && academyPath.length &&
             (

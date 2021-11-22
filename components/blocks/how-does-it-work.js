@@ -19,7 +19,7 @@ export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents 
 
     if (change) {
       imageAnimation.start({
-        x: (step * 1) % 2 == 0 ? "50%" : "0%",
+        x: (step * 1) % 2 == 0 ? "100%" : "0%",
         opacity: 1,
         transition: {
           ease: [0.17, 0.67, 0.83, 0.67],

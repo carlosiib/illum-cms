@@ -55,6 +55,11 @@
 }
 
 /*ACADEMY PATH */
+.path-main-btn {
+  padding: 8px 2.4rem;
+  z-index: 10;
+}
+
 .path-btn {
   color: var(--white-color);
   border-top-left-radius: 8px;
@@ -95,7 +100,8 @@
 .skew-container {
   position: sticky;
   top: 20%;
-  z-index: 10%;
+  width: 540px;
+  z-index: 10;
 }
 
 .secondary-img {
@@ -109,7 +115,7 @@
 }
 
 .hwd-description {
-  width: 50%;
+  width: 45%;
   padding: 10rem 4rem 10rem 0;
 }
 
