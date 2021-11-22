@@ -21,6 +21,19 @@
   font-display: swap;
 }
 
+body,
+h2 {
+  font-family: 'Domine' !important;
+}
+
+h1,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Cooper Lt BT' !important;
+}
+
 .b-1 {
   border: 1px solid red;
 }
