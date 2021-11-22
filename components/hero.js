@@ -7,7 +7,7 @@ export default function Hero({ buttons, image, navigation, page }) {
   return (
     <Box >
       <Navigation {...navigation} />
-      <Box as="main" className="b-2 hero-container" maxW="7xl" mx="auto" mt={4}>
+      <Box as="main" className="hero-container" maxW="7xl" mx="auto" mt={6}>
         <Center>
           <Box px={[6, 12]} pr={{ xl: 16 }}>
             <Heading
@@ -60,6 +60,8 @@ export default function Hero({ buttons, image, navigation, page }) {
           alt={image.title}
           title={image.title}
           layout="fill"
+          width="540"
+          heigh="520"
           loading="lazy"
         />
       </Box>

@@ -37,7 +37,7 @@ export default function Customers({ heading, customerContents }) {
   };
   return (
     <Box maxW="7xl" mx="auto" py={12} className="customers-container">
-      <Heading as="h6" mb={14} >
+      <Heading as="h6" mb={14} fontSize={'6xl'}>
         {heading}
       </Heading>
       <Box>

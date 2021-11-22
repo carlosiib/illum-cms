@@ -10,6 +10,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { Transition } from 'react-transition-group'
 
@@ -174,7 +175,7 @@ export default function Navigation({ pages, buttons }) {
           <Flex w={{ lg: 0 }} flex={{ lg: '1 1 0' }}>
             <Link href="/">
               <a>
-                <VisuallyHidden>GraphCMS</VisuallyHidden>
+                <VisuallyHidden>Illumidesk</VisuallyHidden>
                 <Box as={LogoSVG} h={12} color="indigo.600" w="auto" />
               </a>
             </Link>
@@ -236,16 +237,17 @@ export default function Navigation({ pages, buttons }) {
               {buttons.map((button) => {
                 return (
                   <Link key={button.id} href={`${button.href}`} passHref>
-                    <ChakraLink
+                    <motion.a
                       className="anchor-link"
-                      fontSize="md"
-                      fontWeight="medium"
-                      _hover={{
-                        color: 'white'
-                      }}
-                    >
+                      whileHover={{
+                        scale: 1.04,
+                        transition: {
+                          type: "spring",
+                          stiffness: 1000,
+                        }
+                      }}>
                       {button.label}
-                    </ChakraLink>
+                    </motion.a>
                   </Link>
                 )
               })}

@@ -1,7 +1,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
-import { Box, Center } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 import 'swiper/css'
 
 SwiperCore.use([Navigation]);
@@ -29,8 +29,8 @@ export default function Testimonial({ testimonialContents }) {
             <SwiperSlide key={author}>
               <Box className="quote-item">
                 <blockquote>{quote}</blockquote>
-                <p className="quote-author">{author}</p>
-                <p>{designation}</p>
+                <Text fontWeight={'bold'} letterSpacing={'1.3px'} fontSize={'1.1rem'} mb={2}>{author}</Text>
+                <Text>{designation}</Text>
               </Box>
             </SwiperSlide>
           )

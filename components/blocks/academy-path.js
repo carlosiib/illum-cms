@@ -1,18 +1,42 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Heading, Box, Flex, Center } from '@chakra-ui/layout'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { Heading, Box, Flex, Center, Text } from '@chakra-ui/layout'
 
 export default function AcademyPath({ title, academyPath }) {
-  console.log(academyPath)
   const [currentPath, setCurrentPath] = useState("Instructors")
   const [path, setPath] = useState(null)
 
+  // Intersection observer Hook for animations
+  const { ref, inView } = useInView()
+  const animation = useAnimation()
+
   useEffect(() => {
     const filter = academyPath.filter(path => path.reference === currentPath)
-    console.log(filter)
     setPath(filter)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPath])
+
+  useEffect(() => {
+    if (inView) {
+      animation.start({
+        opacity: 1,
+        pathLength: 1,
+        transition: {
+          duration: 2,
+          ease: "easeInOut"
+        }
+      })
+    }
+    if (!inView) {
+      animation.start({
+        opacity: 0,
+        pathLength: 0,
+      })
+    }
+
+  }, [inView, animation])
 
 
   if (!academyPath) return null
@@ -20,60 +44,80 @@ export default function AcademyPath({ title, academyPath }) {
 
   return (
     <Box my={12}>
-      <Box as="section" maxW="7xl" mx="auto" className="b-2">
-        <Flex justifyContent={'flex-end'} mr={'22%'}>
-          <button className="anchor-link path-main-btn">{title}</button>
+      <Box as="section" maxW="7xl" mx="auto" >
+        <Flex justifyContent={'flex-end'} mr={'19%'}>
+          <motion.button
+            className="anchor-link path-main-btn"
+            whileHover={{
+              scale: 1.04,
+              transition: {
+                type: "spring",
+                stiffness: 1000,
+              }
+            }}>
+            {title}
+          </motion.button>
         </Flex>
 
-        <div className="b-3 svg-container">
-          <div className="svg-item">
-            <svg
+        <Box className="svg-container" ref={ref}>
+          <motion.div className="svg-item">
+            <motion.svg
               xmlns="http://www.w3.org/2000/svg"
-              width="1250"
+              width="1300"
               height="100"
               viewBox="0 0 800 97"
               fill="none"
+              initial="hidden"
+              animate="visible"
             >
-              <path
+              <motion.path
                 d="M581 0V39.2718C581 42.0332 578.761 44.2718 576 44.2718H548.416H5.99999C3.23857 44.2718 1 46.5104 1 49.2718V97"
                 stroke={currentPath === "Content Managers" ? "#52b56b" : "#3f85ca"}
                 strokeWidth="3"
+                animate={animation}
               />
-            </svg>
-          </div>
+            </motion.svg>
+          </motion.div>
 
-          <div className="svg-item">
-            <svg
+          <Box className="svg-item">
+            <motion.svg
               xmlns="http://www.w3.org/2000/svg"
-              width="1245"
+              width="1280"
               height="100"
               viewBox="0 0 5 100"
               fill="none"
+              initial="hidden"
+              animate="visible"
             >
-              <path
+              <motion.path
                 d="M225 0V63.1592C225 65.9206 222.761 68.1592 220 68.1592H5.99999C3.23857 68.1592 1 70.3978 1 73.1592V100"
                 stroke={currentPath === "Learners" ? "#52b56b" : "#3f85ca"}
                 strokeWidth="3"
+                animate={animation}
               />
-            </svg>
-          </div>
+            </motion.svg>
+          </Box>
 
-          <div className="svg-item">
-            <svg
+          <Box className="svg-item">
+            <motion.svg
               xmlns="http://www.w3.org/2000/svg"
-              width="1230"
+              width="1250"
               height="113"
               viewBox="-380 10 300 99"
               fill="none"
+              initial="hidden"
+              animate="visible"
             >
-              <path
+              <motion.path
                 d="M1 0V62.1608C1 64.9222 3.23858 67.1608 6 67.1608H106C108.761 67.1608 111 69.3994 111 72.1608V99"
                 stroke={currentPath === "Instructors" ? "#52b56b" : "#3f85ca"}
                 strokeWidth="3"
+                animate={animation}
               />
-            </svg>
-          </div>
-        </div>
+            </motion.svg>
+          </Box>
+        </Box>
+
         <Flex justify={"space-around"} direction={'row-reverse'}>
           {academyPath && academyPath.length &&
             (
@@ -82,7 +126,7 @@ export default function AcademyPath({ title, academyPath }) {
                 key={path.id}
                 className={currentPath === `${path.reference}` ? "path-btn" : "path-btn path-sec-btn"}
                 onClick={() => setCurrentPath(`${path.reference}`)}>
-                For {path.reference}
+                FOR {path.reference}
               </button>))
             )
           }
@@ -90,7 +134,7 @@ export default function AcademyPath({ title, academyPath }) {
         {path && path.length &&
           (
             path.map(p => (
-              <Box key={p.id}>
+              <Box key={p.id} >
                 <Box className="path-container">
                   <Flex justify={'space-between'}>
                     <Box w={'70%'}>
@@ -98,19 +142,20 @@ export default function AcademyPath({ title, academyPath }) {
                       <Flex>
                         <Box mr={12} w={'40%'}>
                           <img src={p.firstImage.url} alt={p.title} width="98" height="100" loading="lazy" />
-                          <p>{p.firstSubtitle}</p>
-                          <p>{p.firstDescription}</p>
+                          <Text fontSize={'lg'} mb={4} fontWeight={'bold'}>{p.firstSubtitle}</Text>
+                          <Text mb={4}>{p.firstDescription}</Text>
                           <Link href={p.firstHrefLink}>
                             <a target="_blank"
-                              rel="noreferrer">
+                              rel="noreferrer"
+                              className="path-content-anchor">
                               {p.firstHrefLabel}
                             </a>
                           </Link>
                         </Box>
                         <Box w={'40%'}>
                           <img src={p.secondImage.url} alt={p.title} width="98" height="100" loading="lazy" />
-                          <p>{p.secondSubtitle}</p>
-                          <p>{p.secondDescription}</p>
+                          <Text fontSize={'lg'} mb={4} fontWeight={'bold'}>{p.secondSubtitle}</Text>
+                          <Text >{p.secondDescription}</Text>
                         </Box>
                       </Flex>
                     </Box>

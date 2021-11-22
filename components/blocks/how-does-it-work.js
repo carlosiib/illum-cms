@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Box, Heading, Flex } from "@chakra-ui/layout"
+import { Box, Heading, Flex, Text } from "@chakra-ui/layout"
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 
@@ -56,7 +56,7 @@ export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents 
 
   return (
     <Box maxW="7xl" mx="auto" py={12} className="hdw-container">
-      <Heading as="h5" mb={14} textAlign={'center'}>{title}</Heading>
+      <Heading as="h5" mb={'4.2rem'} textAlign={'center'} fontSize={'6xl'}>{title}</Heading>
 
       <Box className="hdw-content">
         <motion.div animate={imageAnimation} className="skew-container">
@@ -77,7 +77,7 @@ export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents 
         {
           howDoesItWorkContents &&
           (
-            <div >
+            <Box>
               <SkewContent
                 step={"1"}
                 content={howDoesItWorkContents[0]}
@@ -98,7 +98,7 @@ export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents 
                 content={howDoesItWorkContents[3]}
                 downAnimation={(direction) => handleAnimation(direction)}
               />
-            </div>
+            </Box>
           )
         }
       </Box>
@@ -120,32 +120,32 @@ function SkewContent({ content, step, downAnimation }) {
     <>
 
       {step === "1" && (
-        <Box ref={ref} color={'red'} className="first-content hwd-description">
-          <Heading as="h6">{content.title}</Heading>
-          <p>{content.subtitle}</p>
+        <Box ref={ref} className="first-content hwd-description">
+          <Heading as="h6" mb={'6'} >{content.title}</Heading>
+          <Text lineHeight={'1.6'}>{content.subtitle}</Text>
         </Box>
       )}
 
       {step === "2" && (
-        <Box ref={ref} color={'orange'} className="left-description hwd-description">
-          <Heading as="h6">{content.title}</Heading>
-          <p>{content.subtitle}</p>
+        <Box ref={ref} className="left-description hwd-description">
+          <Heading as="h6" mb={'6'}>{content.title}</Heading>
+          <Text lineHeight={'1.6'}>{content.subtitle}</Text>
         </Box>
       )}
 
       {step === "3" && (
         <Flex ref={ref} justifyContent={'flex-end'}>
-          <Box color={'yellow'} className="right-description hwd-description">
-            <Heading as="h6">{content.title}</Heading>
-            <p>{content.subtitle}</p>
+          <Box className="right-description hwd-description">
+            <Heading as="h6" mb={'6'}>{content.title}</Heading>
+            <Text lineHeight={'1.6'}>{content.subtitle}</Text>
           </Box>
         </Flex>
       )}
 
       {step === "4" && (
-        <Box ref={ref} color={'orange'} className="left-description hwd-description">
-          <Heading as="h6">{content.title}</Heading>
-          <p>{content.subtitle}</p>
+        <Box ref={ref} className="left-description hwd-description">
+          <Heading as="h6" mb={'6'}>{content.title}</Heading>
+          <Text lineHeight={'1.6'}>{content.subtitle}</Text>
         </Box>
       )}
 

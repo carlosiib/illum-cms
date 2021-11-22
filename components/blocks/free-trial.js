@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Heading, Box } from '@chakra-ui/layout'
+import { motion } from 'framer-motion'
+import { Heading, Box, Text } from '@chakra-ui/layout'
 
 export default function FreeTrial({
   freeTrialTitle,
@@ -10,11 +11,23 @@ export default function FreeTrial({
   // Rename prop otherwise duplicated prop name error -> CMS schema names  
 
   return (
-    <Box maxW="7xl" mx="auto" py={12} className="free-trial-container">
+    <Box maxW="7xl" mx="auto" py={12} className="free-trial-container" textAlign={'center'}>
       <Heading as="h4" mb={6}>{freeTrialTitle}</Heading>
-      <p>{freeTrialSubtitle}</p>
+      <Text mb={8}>{freeTrialSubtitle}</Text>
       <Link href={freeTrialHrefLink}>
-        <a target="_blank" rel="noreferrer" className="anchor-link" >{freeTrialHrefLabel}</a>
+        <motion.a
+          target="_blank"
+          rel="noreferrer"
+          className="anchor-link"
+          whileHover={{
+            scale: 1.04,
+            transition: {
+              type: "spring",
+              stiffness: 1000,
+            }
+          }}>
+          {freeTrialHrefLabel}
+        </motion.a>
       </Link>
     </Box>
   )

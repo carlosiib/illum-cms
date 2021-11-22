@@ -74,8 +74,13 @@ export const theme = extendTheme({
   },
   styles: {
     global: {
-      'html, body': {
-        color: 'white'
+      'html, body, h2': {
+        color: 'black ',
+        fontFamily: 'Domine !important'
+      },
+      'h1, h3, h4, h5, h6': {
+        fontFamily: 'Cooper Lt BT !important',
+        color: 'black !important',
       },
       'ul, ol': {
         listStyle: 'none'
