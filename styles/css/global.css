@@ -43,6 +43,7 @@
   border: 1px solid cyan;
 }
 
+/* HERO */
 .hero-container {
   display: flex;
   flex-direction: row-reverse;
@@ -87,10 +88,6 @@
 }
 
 /* HOW DOES IT WORK */
-.hdw-container {
-  color: var(--black-color);
-}
-
 .hdw-content {
   position: relative;
 }
@@ -135,14 +132,72 @@
 
 /* CUSTOMERS */
 .customers-container {
-  color: var(--black-color);
-}
-
-.customers-container {
   text-align: center;
 }
 
+/* TESTIMONIAL */
+.testimonial-container {
+  position: relative;
+}
+
+.testimonial-quote {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.quote-item {
+  padding: 1rem 1.2rem;
+}
+
+.swiperPrev,
+.swiperNext {
+  border: solid;
+  border-width: 0 8px 8px 0;
+  display: inline-block;
+  padding: 8px;
+  color: var(--secondary-color);
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+}
+
+.swiperPrev {
+  transform: rotate(135deg);
+  left: 25%;
+}
+
+.swiperNext {
+  right: 26%;
+  transform: rotate(315deg);
+}
+
+.quote-item blockquote {
+  font-style: italic;
+  line-height: 1.6;
+  quotes: '“' '”' '‘' '’';
+  margin-bottom: 1rem;
+}
+
+.quote-item blockquote:before {
+  content: open-quote;
+}
+
+.quote-item blockquote:after {
+  content: close-quote;
+}
+
+.quote-author {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
 /* UTILS */
+.hdw-container,
+.customers-container,
+.testimonial-container {
+  color: var(--black-color);
+}
+
 .anchor-link {
   color: var(--white-color);
   background-color: var(--primary-color);
