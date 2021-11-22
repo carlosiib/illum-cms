@@ -1,83 +1,89 @@
+import { useState } from 'react';
 import {
   Box,
-  Heading,
   Text,
   FormLabel,
-  VisuallyHidden,
-  Button,
-  Input
+  VisuallyHidden
 } from '@chakra-ui/react'
 
-export default function NewsletterSignup({ ctaLabel, subtitle, title }) {
+export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("IDLE");
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const subscribe = async () => {
+    setState("LOADING");
+    setErrorMessage(null);
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        "body": JSON.stringify({ email: email })
+      });
+      setState("SUCCESS");
+
+    } catch (e) {
+      setErrorMessage(e.response.data.error);
+      setState("ERROR");
+    }
+  };
+
   return (
-    <Box bg="white">
-      <Box maxW="7xl" mx="auto" py={{ base: 12, lg: 16 }} px={[4, 6, null, 8]}>
-        <Heading
-          as="h2"
-          fontSize={['3xl', '4xl']}
-          lineHeight="shorter"
-          fontWeight="extrabold"
-          display={['inline', 'block']}
-          letterSpacing="tight"
-          color="gray.900"
+    <Box maxW="7xl" mx="auto" py={12} position={'relative'} >
+      <Box position={'absolute'} top={'0'} left={'30%'} zIndex={'10'}>
+        <Text
+          fontSize={['3xl', '5xl']}
+          fontWeight="bold"
+          fontFamily="Cooper LT BT"
         >
           {title}
-        </Heading>
+        </Text>
         <Text
-          fontSize={['3xl', '4xl']}
-          lineHeight="shorter"
-          fontWeight="extrabold"
-          display={['inline', 'block']}
-          letterSpacing="tight"
-          color="indigo.600"
+          fontSize={['3xl', '6xl']}
+          fontWeight="bold"
+          fontFamily="Cooper LT BT"
         >
           {subtitle}
         </Text>
-        <Box as="form" mt={8} display={{ sm: 'flex' }}>
+        <Box mt={2} display={{ sm: 'flex' }}>
           <VisuallyHidden as={FormLabel} htmlFor="emailAddress">
             Email address
           </VisuallyHidden>
-          <Input
+          <input
             id="emailAddress"
-            name="email"
             type="email"
             autoComplete="email"
             required
-            placeholder="Enter your email"
-            width="full"
-            height="full"
-            maxW={{ sm: 'xs' }}
-            px={5}
-            py={3}
-            borderColor="gray.300"
-            _placeholder={{
-              color: 'gray.500'
-            }}
+            placeholder="YOUR EMAIL"
+            className="newsletter-input"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <Box
-            mt={[3, 0]}
-            ml={{ sm: 3 }}
-            flexShrink={{ sm: 0 }}
-            borderRadius="md"
-            boxShadow="md"
+          <button
+            className={state === "LOADING" ? "newsletter-btn" : "newsletter-btn"}
+            type="button"
+            disabled={state === "LOADING"}
+            onClick={subscribe}
           >
-            <Button
-              type="submit"
-              width="full"
-              height="full"
-              px={5}
-              py={3}
-              bg="indigo.600"
-              color="white"
-              _hover={{
-                bg: 'indigo.700'
-              }}
-            >
-              {ctaLabel || 'Submit'}
-            </Button>
-          </Box>
+            {ctaLabel || 'Submit'}
+          </button>
+        </Box>
+        <Box mt={2}>
+          {state === "ERROR" && (
+            <p className="failedSubmission">{errorMessage}</p>
+          )}
+          {state === "SUCCESS" && (
+            <p className="successSubmission">Success!</p>
+          )}
         </Box>
       </Box>
+      <img
+        src={image.url}
+        className="newsletter-img"
+        alt="Newsletter join now"
+        width="430"
+        height="450"
+        loading="lazy" />
     </Box>
   )
 }
