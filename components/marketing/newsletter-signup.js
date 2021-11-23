@@ -87,7 +87,7 @@ export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
         className="newsletter-img"
         alt="Newsletter join now"
         width={isMobile ? "240" : "430"}
-        heigh={isMobile ? "240" : "450"}
+        height={isMobile ? "240" : "450"}
         loading="lazy" />
     </Box>
   )

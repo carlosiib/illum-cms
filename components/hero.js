@@ -4,7 +4,7 @@ import Button from '@/components/button'
 import Navigation from '@/components/navigation'
 
 export default function Hero({ buttons, image, navigation, page }) {
-  const [isMobile] = useMediaQuery("(max-width: 426px)")
+  const [isMobile] = useMediaQuery("(max-width: 769px)")
 
   return (
     <Box >
@@ -59,12 +59,9 @@ export default function Hero({ buttons, image, navigation, page }) {
         </Center>
         <img
           src={image.url}
-          alt={image.title}
-          title={image.title}
-          layout="fill"
+          alt="Star learning with Illumidesk"
           width={isMobile ? "230" : "540"}
-          heigh={isMobile ? "230" : "520"}
-          loading="lazy"
+          height={isMobile ? "230" : "520"}
         />
       </Box>
     </Box >
