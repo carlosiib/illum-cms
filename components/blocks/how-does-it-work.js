@@ -124,7 +124,7 @@ function MobileSkew({ content }) {
     <Box className="mobile-container">
       {content.map((c, idx) =>
       (
-        <Box mb={'8'}>
+        <Box mb={'8'} key={c.title}>
           <Text fontSize={'1.1rem'} color={'var(--secondary-color)'} mb={'4'} >Step. {idx + 1}</Text>
           <Text fontSize={'1.2rem'} fontWeight={'700'} mb={'4'}>{c.title}</Text>
           <Text fontSize={'1.1rem'} mb={'4'}>{c.subtitle}</Text>
