@@ -1,9 +1,11 @@
 import { Box, Heading, Stack, Center } from '@chakra-ui/react'
-
+import { useMediaQuery } from "@chakra-ui/react"
 import Button from '@/components/button'
 import Navigation from '@/components/navigation'
 
 export default function Hero({ buttons, image, navigation, page }) {
+  const [isMobile] = useMediaQuery("(max-width: 426px)")
+
   return (
     <Box >
       <Navigation {...navigation} />
@@ -60,8 +62,8 @@ export default function Hero({ buttons, image, navigation, page }) {
           alt={image.title}
           title={image.title}
           layout="fill"
-          width="540"
-          heigh="520"
+          width={isMobile ? "230" : "540"}
+          heigh={isMobile ? "230" : "520"}
           loading="lazy"
         />
       </Box>

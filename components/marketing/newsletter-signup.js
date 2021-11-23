@@ -5,11 +5,14 @@ import {
   FormLabel,
   VisuallyHidden
 } from '@chakra-ui/react'
+import { useMediaQuery } from "@chakra-ui/react"
 
 export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("IDLE");
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const [isMobile] = useMediaQuery("(max-width: 426px)")
 
   const subscribe = async () => {
     setState("LOADING");
@@ -29,11 +32,12 @@ export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
 
   return (
     <Box maxW="7xl" mx="auto" py={12} position={'relative'} >
-      <Box position={'absolute'} top={'0'} left={'30%'} zIndex={'10'}>
+      <Box position={'absolute'} top={'0'} left={'30%'} zIndex={'10'} className="newsletter-content">
         <Text
           fontSize={['3xl', '5xl']}
           fontWeight="bold"
           fontFamily="Cooper LT BT"
+          className="newsletter-title"
         >
           {title}
         </Text>
@@ -41,10 +45,11 @@ export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
           fontSize={['3xl', '6xl']}
           fontWeight="bold"
           fontFamily="Cooper LT BT"
+          className="newsletter-subtitle"
         >
           {subtitle}
         </Text>
-        <Box mt={2} display={{ sm: 'flex' }}>
+        <Box mt={2} display={{ sm: 'flex' }} className="newsletter-form mobile-container">
           <VisuallyHidden as={FormLabel} htmlFor="emailAddress">
             Email address
           </VisuallyHidden>
@@ -81,8 +86,8 @@ export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
         src={image.url}
         className="newsletter-img"
         alt="Newsletter join now"
-        width="430"
-        height="450"
+        width={isMobile ? "240" : "430"}
+        heigh={isMobile ? "240" : "450"}
         loading="lazy" />
     </Box>
   )

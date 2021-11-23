@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react"
 import { Box, Heading, Flex, Text } from "@chakra-ui/layout"
+import { useMediaQuery } from "@chakra-ui/react"
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 
 export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents }) {
+
+  const [isMobile] = useMediaQuery("(max-width: 769px)")
 
   const config = {
     change: false,
@@ -57,51 +60,80 @@ export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents 
   return (
     <Box maxW="7xl" mx="auto" py={12} className="hdw-container">
       <Heading as="h5" mb={'4.2rem'} textAlign={'center'} fontSize={'6xl'}>{title}</Heading>
+      {isMobile ?
+        (
+          <Box>
+            <MobileSkew content={howDoesItWorkContents} />
+          </Box>
+        )
+        :
+        (
+          <Box className="hdw-content">
+            <motion.div animate={imageAnimation} className="skew-container">
+              <img
+                src={mainImage.url}
+                loading="lazy"
+                alt="Illumidesk task dashboard"
+                width="540"
+                height="429" />
+              <img
+                src={howDoesItWorkContents[0].secondaryImage.url}
+                loading="lazy"
+                alt="Grader console dashboard"
+                className="secondary-img"
+              />
+            </motion.div>
 
-      <Box className="hdw-content">
-        <motion.div animate={imageAnimation} className="skew-container">
-          <img
-            src={mainImage.url}
-            loading="lazy"
-            alt="Illumidesk task dashboard"
-            width="540"
-            height="429" />
-          <img
-            src={howDoesItWorkContents[0].secondaryImage.url}
-            loading="lazy"
-            alt="Grader console dashboard"
-            className="secondary-img"
-          />
-        </motion.div>
+            {
+              howDoesItWorkContents &&
+              (
+                <Box>
+                  <SkewContent
+                    step={"1"}
+                    content={howDoesItWorkContents[0]}
+                    downAnimation={(direction) => handleAnimation(direction)}
+                  />
+                  <SkewContent
+                    step={"2"}
+                    content={howDoesItWorkContents[1]}
+                    downAnimation={(direction) => handleAnimation(direction)}
+                  />
+                  <SkewContent
+                    step={"3"}
+                    content={howDoesItWorkContents[2]}
+                    downAnimation={(direction) => handleAnimation(direction)}
+                  />
+                  <SkewContent
+                    step={"4"}
+                    content={howDoesItWorkContents[3]}
+                    downAnimation={(direction) => handleAnimation(direction)}
+                  />
+                </Box>
+              )
+            }
+          </Box>
+        )
+      }
 
-        {
-          howDoesItWorkContents &&
-          (
-            <Box>
-              <SkewContent
-                step={"1"}
-                content={howDoesItWorkContents[0]}
-                downAnimation={(direction) => handleAnimation(direction)}
-              />
-              <SkewContent
-                step={"2"}
-                content={howDoesItWorkContents[1]}
-                downAnimation={(direction) => handleAnimation(direction)}
-              />
-              <SkewContent
-                step={"3"}
-                content={howDoesItWorkContents[2]}
-                downAnimation={(direction) => handleAnimation(direction)}
-              />
-              <SkewContent
-                step={"4"}
-                content={howDoesItWorkContents[3]}
-                downAnimation={(direction) => handleAnimation(direction)}
-              />
-            </Box>
-          )
-        }
-      </Box>
+    </Box>
+  )
+}
+
+function MobileSkew({ content }) {
+  return (
+    <Box className="mobile-container">
+      {content.map((c, idx) =>
+      (
+        <Box mb={'8'}>
+          <Text fontSize={'1.1rem'} color={'var(--secondary-color)'} mb={'4'} >Step. {idx + 1}</Text>
+          <Text fontSize={'1.2rem'} fontWeight={'700'} mb={'4'}>{c.title}</Text>
+          <Text fontSize={'1.1rem'} mb={'4'}>{c.subtitle}</Text>
+          <Flex justifyContent={'center'} alignItems={'center'}>
+            <img className="secondary-img" src={c.secondaryImage.url} width="290" height="218" alt={c.title} loading="lazy" />
+          </Flex>
+        </Box>
+      )
+      )}
     </Box>
   )
 }

@@ -71,7 +71,7 @@ export default function Navigation({ pages, buttons }) {
 
   // Mobile Navbar
   return (
-    <Box ref={container} pos="relative" bg="white" boxShadow="base" className="b-1">
+    <Box ref={container} pos="relative">
       <Transition in={mobileNavOpen} timeout={150}>
         {(state) => (
           <Box
@@ -142,6 +142,7 @@ export default function Navigation({ pages, buttons }) {
                             alignItems="center"
                             borderRadius="md"
                             color={isActive ? 'var(--primary-color)' : 'var(--black-color)'}
+                            _focus={{ boxShadow: 'unset' }}
                           >
                             <Text
                               as="span"
@@ -166,7 +167,7 @@ export default function Navigation({ pages, buttons }) {
       </Transition>
 
       {/* DESKTOP NAVBAR */}
-      <Box maxW="7xl" mx="auto" px={[4, 6]} className="b-1">
+      <Box maxW="7xl" mx="auto" px={[4, 6]}>
         <Stack
           display="flex"
           justifyContent={['space-between', null, 'flex-start']}
@@ -230,6 +231,7 @@ export default function Navigation({ pages, buttons }) {
                         textDecor: 'none',
                         color: "var(--primary-color)"
                       }}
+                      _focus={{ boxShadow: 'unset' }}
                     >
                       {page.navigationLabel ||
                         page.slug.charAt(0).toUpperCase() + page.slug.slice(1)}

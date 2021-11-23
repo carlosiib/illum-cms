@@ -9,7 +9,7 @@ export default function FreeTrial({
   freeTrialHrefLink }) {
 
   return (
-    <Box maxW="7xl" mx="auto" py={12} className="free-trial-container" textAlign={'center'}>
+    <Box maxW="7xl" mx="auto" py={12} className="free-trial-container mobile-container" textAlign={'center'}>
       <Heading as="h4" mb={6}>{freeTrialTitle}</Heading>
       <Text mb={8}>{freeTrialSubtitle}</Text>
       <Link href={freeTrialHrefLink}>

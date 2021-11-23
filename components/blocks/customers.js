@@ -40,8 +40,8 @@ export default function Customers({ heading, customerContents }) {
       <Heading as="h6" mb={14} fontSize={'6xl'}>
         {heading}
       </Heading>
-      <Box>
-        <Swiper {...swiperOption}>
+      <Box className="mobile-container">
+        <Swiper {...swiperOption} >
           <Flex justifyContent={'center'} alignItems={'center'}>
             {customerContents &&
               (

@@ -26,7 +26,7 @@ function GridColumnHeading({ children }) {
 
 function GridColumn({ links, title }) {
   return (
-    <Box className="footer-grid-col">
+    <Box className="footer-grid-col" mb={'6'}>
       <GridColumnHeading>{title}</GridColumnHeading>
       <Stack as="ul" mt={2} spacing={3}>
         {links.map((link) => (
@@ -55,6 +55,7 @@ function SocialMediaLink({ href, title, icon }) {
       mr={6}
       mb={8}
       aria-label={title}
+      className="m-footer-icons"
     >
       <VisuallyHidden>{title}</VisuallyHidden>
       <Box as={icon} w={6} h={6} />
@@ -69,10 +70,10 @@ export default function Footer({ resourcesLinks, legalLinks }) {
         Footer
       </VisuallyHidden>
 
-      <Box maxW="7xl" mx="auto" py={{ base: 12, lg: 16 }} px={[4, 6, null, 8]}>
-        <Flex justifyContent={'space-between'}>
-          <Box>
-            <Box mb={12}>
+      <Box maxW="7xl" mx="auto" py={{ base: 12, lg: 16 }} px={[4, 6, null, 8]} >
+        <Flex justifyContent={'space-between'} className="m-footer-content" >
+          <Box mb={'6'}>
+            <Box mb={12} className="m-footer-logo">
               <Link href="/">
                 <a>
                   <VisuallyHidden>Illumidesk</VisuallyHidden>
@@ -111,12 +112,13 @@ export default function Footer({ resourcesLinks, legalLinks }) {
               fontWeight={'700'}
               letterSpacing={'1.3px'}
               order={{ md: 1 }}
+              marginBottom={'2rem'}
             >
               &copy; Illumidesk LLC
             </Text>
           </Box>
 
-          <Flex>
+          <Flex className="m-footer-right">
             <GridColumn
               links={resourcesLinks.length && resourcesLinks}
               title="RESOURCES"
