@@ -47,7 +47,7 @@ export default function AcademyPath({ title, academyPath }) {
 
 function MobilePath({ academyPath }) {
   return (
-    <>
+    <div>
       {academyPath && academyPath.length &&
         (
           academyPath.map(path =>
@@ -115,7 +115,7 @@ function MobilePath({ academyPath }) {
           ))
         )
       }
-    </>
+    </div>
   )
 }
 
@@ -153,7 +153,7 @@ function DesktopPath({ academyPath }) {
   }, [inView, animation])
 
   return (
-    <>
+    <div>
       <div className="svg-container" ref={ref} >
         <motion.div className="svg-item">
           <motion.svg
@@ -272,7 +272,7 @@ function DesktopPath({ academyPath }) {
           ))
         )
       }
-    </>
+    </div>
   )
 }
 
