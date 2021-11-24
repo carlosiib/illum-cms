@@ -1,4 +1,4 @@
-import { Box, Heading, Stack, Center } from '@chakra-ui/react'
+import { Box, Heading, Stack, Center, Grid } from '@chakra-ui/react'
 import { useMediaQuery } from "@chakra-ui/react"
 import Button from '@/components/button'
 import Navigation from '@/components/navigation'
@@ -9,7 +9,7 @@ export default function Hero({ buttons, image, navigation, page }) {
   return (
     <Box >
       <Navigation {...navigation} />
-      <Box as="main" className="hero-container" maxW="7xl" mx="auto" mt={6}>
+      <Box as="main" className="hero-container b-3" maxW="7xl" mx="auto" mt={6} padding={'0 1rem'}>
         <Center>
           <Box px={[6, 12]} pr={{ xl: 16 }}>
             <Heading
@@ -57,12 +57,16 @@ export default function Hero({ buttons, image, navigation, page }) {
             )}
           </Box>
         </Center>
-        <img
-          src={image.url}
-          alt="Star learning with Illumidesk"
-          width={isMobile ? "230" : "540"}
-          height={isMobile ? "230" : "520"}
-        />
+        <Grid w={'100%'} placeItems={'center'}>
+          <Box>
+            <img
+              src={image.url}
+              alt="Star learning with Illumidesk"
+              width={isMobile ? "230" : "540"}
+              height={isMobile ? "230" : "520"}
+            />
+          </Box>
+        </Grid>
       </Box>
     </Box >
   )

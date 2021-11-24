@@ -36,23 +36,25 @@ export default function Customers({ heading, customerContents }) {
     },
   };
   return (
-    <Box maxW="7xl" mx="auto" py={12} className="customers-container">
-      <Heading as="h6" mb={14} fontSize={'6xl'}>
-        {heading}
-      </Heading>
-      <Box className="mobile-container">
-        <Swiper {...swiperOption} >
-          <Flex justifyContent={'center'} alignItems={'center'}>
-            {customerContents &&
-              (
-                customerContents.map(({ imageTitle, image }) =>
-                  <SwiperSlide key={imageTitle}>
-                    <img src={image.url} width="100" height="100" alt={imageTitle} loading="lazy" />
-                  </SwiperSlide>
-                )
-              )}
-          </Flex>
-        </Swiper>
+    <Box py={12} >
+      <Box maxW="7xl" mx="auto" className="customers-container b-3" padding={'0 1rem'}>
+        <Heading as="h6" mb={14} fontSize={'6xl'}>
+          {heading}
+        </Heading>
+        <Box className="mobile-container">
+          <Swiper {...swiperOption} >
+            <Flex justifyContent={'center'} alignItems={'center'}>
+              {customerContents &&
+                (
+                  customerContents.map(({ imageTitle, image }) =>
+                    <SwiperSlide key={imageTitle}>
+                      <img src={image.url} width="100" height="100" alt={imageTitle} loading="lazy" />
+                    </SwiperSlide>
+                  )
+                )}
+            </Flex>
+          </Swiper>
+        </Box>
       </Box>
     </Box>
   )

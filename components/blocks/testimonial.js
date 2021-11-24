@@ -19,26 +19,28 @@ export default function Testimonial({ testimonialContents }) {
   };
 
   return (
-    <Box maxW="7xl" mx="auto" py={12} className="testimonial-container">
-      <div className="swiper-button-prev">
-        <span className="swiperPrev"></span>
-      </div>
-      <Swiper {...swiperOption} className="testimonial-quote">
-        {testimonialContents && (
-          testimonialContents.map(({ author, quote, designation }) =>
-            <SwiperSlide key={author}>
-              <Box className="quote-item">
-                <blockquote>{quote}</blockquote>
-                <Text fontWeight={'bold'} letterSpacing={'1.3px'} fontSize={'1.1rem'} mb={2}>{author}</Text>
-                <Text>{designation}</Text>
-              </Box>
-            </SwiperSlide>
-          )
-        )}
-      </Swiper>
-      <div className="swiper-button-next">
-        <span className="swiperNext" ></span>
-      </div>
+    <Box py={12}>
+      <Box maxW="7xl" mx="auto" className="testimonial-container b-3">
+        <div className="swiper-button-prev">
+          <span className="swiperPrev"></span>
+        </div>
+        <Swiper {...swiperOption} className="testimonial-quote">
+          {testimonialContents && (
+            testimonialContents.map(({ author, quote, designation }) =>
+              <SwiperSlide key={author}>
+                <Box className="quote-item">
+                  <blockquote>{quote}</blockquote>
+                  <Text fontWeight={'bold'} letterSpacing={'1.3px'} fontSize={'1.1rem'} mb={2}>{author}</Text>
+                  <Text>{designation}</Text>
+                </Box>
+              </SwiperSlide>
+            )
+          )}
+        </Swiper>
+        <div className="swiper-button-next">
+          <span className="swiperNext"></span>
+        </div>
+      </Box>
     </Box>
 
   )

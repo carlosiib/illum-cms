@@ -6,14 +6,14 @@ import { Heading, Box, Flex, Center, Text } from '@chakra-ui/layout'
 import { useMediaQuery } from "@chakra-ui/react"
 
 export default function AcademyPath({ title, academyPath }) {
-  const [isMobile] = useMediaQuery("(max-width: 769px)")
+  const [isMediumDisplay] = useMediaQuery("(max-width: 1075px)")
 
   if (!academyPath) return null
 
   return (
-    <Box my={12}>
-      <Box as="section" maxW="7xl" mx="auto" >
-        <Flex justifyContent={'flex-end'} mr={'19%'} className="mobile-container main-btn-container">
+    <Box my={12} padding={'0 1rem'}>
+      <Box maxW="7xl" mx="auto" className="b-3" >
+        <Flex justifyContent={'flex-end'} mr={'19%'} className="main-btn-container">
           <motion.button
             className="anchor-link path-main-btn"
             whileHover={{
@@ -27,7 +27,7 @@ export default function AcademyPath({ title, academyPath }) {
           </motion.button>
         </Flex>
 
-        {isMobile ?
+        {isMediumDisplay ?
           (
             <div>
               <MobilePath academyPath={academyPath} />
@@ -35,9 +35,9 @@ export default function AcademyPath({ title, academyPath }) {
           )
           :
           (
-            <Box>
+            <div>
               <DesktopPath academyPath={academyPath} />
-            </Box>
+            </div>
           )
         }
       </Box>
@@ -47,12 +47,12 @@ export default function AcademyPath({ title, academyPath }) {
 
 function MobilePath({ academyPath }) {
   return (
-    <div>
+    <>
       {academyPath && academyPath.length &&
         (
           academyPath.map(path =>
           (
-            <div key={path.reference} className="mobile-container">
+            <div key={path.reference} className="m-path-item">
               <Text
                 backgroundColor={'var(--secondary-color)'}
                 width={'100%'}
@@ -115,7 +115,7 @@ function MobilePath({ academyPath }) {
           ))
         )
       }
-    </div>
+    </>
   )
 }
 
@@ -154,7 +154,7 @@ function DesktopPath({ academyPath }) {
 
   return (
     <>
-      <Box className="svg-container" ref={ref}>
+      <div className="svg-container" ref={ref} >
         <motion.div className="svg-item">
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"
@@ -211,9 +211,9 @@ function DesktopPath({ academyPath }) {
             />
           </motion.svg>
         </Box>
-      </Box>
+      </div>
 
-      <Flex justify={"space-around"} direction={'row-reverse'}>
+      <Flex justify={"space-between"} direction={'row-reverse'} padding={'0 .8rem'}>
         {academyPath && academyPath.length &&
           (
             academyPath.map(path =>
