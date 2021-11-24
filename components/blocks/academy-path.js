@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Heading, Box, Flex, Center, Text } from '@chakra-ui/layout'
-import { useMediaQuery } from "@chakra-ui/react"
+import useMediaQuery from 'hooks/useMediaQuery'
 
 export default function AcademyPath({ title, academyPath }) {
-  const [isMediumDisplay] = useMediaQuery("(max-width: 1075px)")
+  const isMediumDisplay = useMediaQuery("(max-width: 1075px)")
 
   if (!academyPath) return null
 
@@ -122,6 +122,7 @@ function MobilePath({ academyPath }) {
 function DesktopPath({ academyPath }) {
   const [currentPath, setCurrentPath] = useState("Instructors")
   const [path, setPath] = useState(null)
+
   // Intersection observer Hook for animations
   const { ref, inView } = useInView()
   const animation = useAnimation()
@@ -227,51 +228,53 @@ function DesktopPath({ academyPath }) {
         }
       </Flex>
 
-      {path && path.length &&
-        (
-          path.map(p => (
-            <Box key={p.id} >
-              <Box className="path-container">
-                <Flex justify={'space-between'}>
-                  <Box w={'70%'}>
-                    <Heading as="h3" mb={6}>{p.title}</Heading>
-                    <Flex>
-                      <Box mr={12} w={'40%'}>
-                        <img src={p.firstImage.url} alt={p.title} width="98" height="100" loading="lazy" />
-                        <Text fontSize={'lg'} mb={4} fontWeight={'bold'}>{p.firstSubtitle}</Text>
-                        <Text mb={4}>{p.firstDescription}</Text>
-                        <Link href={p.firstHrefLink}>
-                          <a target="_blank"
-                            rel="noreferrer"
-                            className="path-content-anchor">
-                            {p.firstHrefLabel}
-                          </a>
-                        </Link>
-                      </Box>
-                      <Box w={'40%'}>
-                        <img src={p.secondImage.url} alt={p.title} width="98" height="100" loading="lazy" />
-                        <Text fontSize={'lg'} mb={4} fontWeight={'bold'}>{p.secondSubtitle}</Text>
-                        <Text >{p.secondDescription}</Text>
-                      </Box>
-                    </Flex>
-                  </Box>
-                  <Box w={'30%'}>
-                    <Center>
-                      <img
-                        src={p.mainImage.url}
-                        alt={p.for}
-                        loading="lazy"
-                        width="280"
-                        height="420"
-                      />
-                    </Center>
-                  </Box>
-                </Flex>
+      <Box>
+        {path && path.length &&
+          (
+            path.map(p => (
+              <Box key={p.id} >
+                <Box className="path-container">
+                  <Flex justify={'space-between'}>
+                    <Box w={'70%'}>
+                      <Heading as="h3" mb={6}>{p.title}</Heading>
+                      <Flex>
+                        <Box mr={12} w={'40%'}>
+                          <img src={p.firstImage.url} alt={p.title} width="98" height="100" loading="lazy" />
+                          <Text fontSize={'lg'} mb={4} fontWeight={'bold'}>{p.firstSubtitle}</Text>
+                          <Text mb={4}>{p.firstDescription}</Text>
+                          <Link href={p.firstHrefLink}>
+                            <a target="_blank"
+                              rel="noreferrer"
+                              className="path-content-anchor">
+                              {p.firstHrefLabel}
+                            </a>
+                          </Link>
+                        </Box>
+                        <Box w={'40%'}>
+                          <img src={p.secondImage.url} alt={p.title} width="98" height="100" loading="lazy" />
+                          <Text fontSize={'lg'} mb={4} fontWeight={'bold'}>{p.secondSubtitle}</Text>
+                          <Text >{p.secondDescription}</Text>
+                        </Box>
+                      </Flex>
+                    </Box>
+                    <Box w={'30%'}>
+                      <Center>
+                        <img
+                          src={p.mainImage.url}
+                          alt={p.title}
+                          loading="lazy"
+                          width="280"
+                          height="420"
+                        />
+                      </Center>
+                    </Box>
+                  </Flex>
+                </Box>
               </Box>
-            </Box>
-          ))
-        )
-      }
+            ))
+          )
+        }
+      </Box>
     </div>
   )
 }
