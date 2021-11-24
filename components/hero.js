@@ -1,10 +1,10 @@
 import { Box, Heading, Stack, Center, Grid } from '@chakra-ui/react'
-import { useMediaQuery } from "@chakra-ui/react"
+import useMediaQuery from 'hooks/useMediaQuery'
 import Button from '@/components/button'
 import Navigation from '@/components/navigation'
 
 export default function Hero({ buttons, image, navigation, page }) {
-  const [isMobile] = useMediaQuery("(max-width: 769px)")
+  const isMobile = useMediaQuery("(max-width: 769px)")
 
   return (
     <Box >
@@ -18,7 +18,6 @@ export default function Hero({ buttons, image, navigation, page }) {
               letterSpacing="tight"
               lineHeight="1"
               fontWeight="extrabold"
-              color="gray.900"
             >
               {page.title}
             </Heading>

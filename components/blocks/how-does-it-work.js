@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { Box, Heading, Flex, Text } from "@chakra-ui/layout"
-import { useMediaQuery } from "@chakra-ui/react"
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 import useMedia from 'hooks/useMediaQuery'

@@ -10,14 +10,22 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta charSet="utf-8" />
-          <meta httpEquiv="Content-Language" content="en" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/icon.png" />
-          <link rel="apple-touch-icon" href="/icon.png" />
           <link
             rel="stylesheet"
             href="https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css"
+          />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-183495032-6"></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-183495032-6', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
           />
         </Head>
         <body>
