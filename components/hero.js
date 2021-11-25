@@ -63,7 +63,6 @@ export default function Hero({ buttons, image, navigation, page }) {
               alt="Start learning with Illumidesk"
               width={isMobile ? "230" : "540"}
               height={isMobile ? "230" : "520"}
-              loading="lazy"
             />
           </Box>
         </Grid>

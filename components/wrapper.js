@@ -1,8 +1,6 @@
 import * as Blocks from '@/blocks'
-import useMediaQuery from 'hooks/useMediaQuery'
 
 export default function Wrapper({ banner, blocks, hero, navigation, ...page }) {
-  const isMediumDisplay = useMediaQuery("(max-width: 1075px)")
 
   return (
     <>
@@ -11,7 +9,7 @@ export default function Wrapper({ banner, blocks, hero, navigation, ...page }) {
 
         if (!Component) return null
 
-        return <Component key={block.id} page={page} isMediumDisplay={isMediumDisplay} {...block} />
+        return <Component key={block.id} page={page} {...block} />
       })}
     </>
   )

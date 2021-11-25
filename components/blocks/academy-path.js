@@ -3,8 +3,10 @@ import Link from 'next/link'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Heading, Box, Flex, Center, Text } from '@chakra-ui/layout'
+import useMediaQuery from 'hooks/useMediaQuery'
 
-export default function AcademyPath({ title, academyPath, isMediumDisplay }) {
+export default function AcademyPath({ title, academyPath }) {
+  const isMediumDisplay = useMediaQuery("(max-width: 1075px)")
 
   if (!academyPath) return null
 
