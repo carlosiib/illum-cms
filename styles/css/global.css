@@ -303,6 +303,29 @@ h6 {
   text-transform: uppercase;
 }
 
+/* PRICING PLANS */
+.price-cards-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.price-card-item {
+  display: flex;
+  flex-direction: column;
+  width: 38%;
+  background-color: #f6fafe;
+  border: 1px solid #eaf2fa;
+  border-radius: 10px;
+  padding: 2rem 1rem;
+}
+
+.price-card-inner-box {
+  background-color: var(--white-color);
+  border: 1px solid #eaf2fa;
+  border-radius: 10px;
+  padding: 2rem 1.4rem;
+}
+
 /* FOOTER */
 .footer-grid-col:not(:last-child) {
   padding-right: 2rem;
@@ -356,6 +379,20 @@ h6 {
 
   .secondary-img {
     position: unset;
+  }
+
+  .price-cards-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .price-card-item {
+    width: 100%;
+  }
+
+  .price-card-item:not(:last-child) {
+    margin-bottom: 4rem;
   }
 }
 

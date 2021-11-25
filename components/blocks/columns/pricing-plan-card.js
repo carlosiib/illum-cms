@@ -3,75 +3,84 @@ import { Box, Heading, Text, Link, Stack } from '@chakra-ui/react'
 import { CheckIcon } from '@/icons'
 
 export default function PricingPlanCard({
-  annualPrice,
-  billingPeriod,
+  price,
   description,
   included,
-  monthlyPrice,
-  name
+  name,
+  planOption,
+  planLabel,
+  planLink
 }) {
+
   return (
-    <Box
-      border="1px solid"
-      borderColor="gray.200"
-      borderRadius="lg"
-      boxShadow="sm"
-    >
-      <Box p={6} borderBottom="1px solid" borderColor="gray.200">
+    <Box className="price-card-item">
+      <Box>
         <Heading
-          as="h2"
-          fontSize="lg"
+          as="h3"
+          fontSize="2rem"
           lineHeight="6"
-          fontWeight="medium"
-          color="gray.900"
+          fontWeight="700"
+          textAlign={'center'}
+          mb={6}
         >
           {name}
         </Heading>
-        <Text mt={4} fontSize="sm" lineHeight="5" color="gray.500">
-          {description}
-        </Text>
-        <Text mt={8}>
+        <Box textAlign={'center'} className="price-card-inner-box">
           <Text
-            as="span"
-            fontWeight="extrabold"
-            fontSize="4xl"
+            fontWeight="900"
+            fontSize="3xl"
             lineHeight="shorter"
-            color="gray.900"
+            mb={6}
           >
-            {new Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: 'USD',
-              minimumFractionDigits: 0
-            }).format(billingPeriod === 'monthly' ? monthlyPrice : annualPrice)}
+            {price ?
+              new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0
+              }).format(price)
+              :
+              (<> Contact us </>)
+            }
           </Text>
-          <Text as="span" fontSize="md" fontWeight="medium" color="gray.500">
-            {billingPeriod === 'monthly' ? '/mo' : '/yr'}
+
+          {planOption ?
+            (<Text >{planOption} </Text>)
+            :
+            (<Text opacity='0'>Option</Text>)
+          }
+
+
+          <Text mt={4} fontSize="lg" lineHeight="5" paddingRight={'1rem'}>
+            {description}
           </Text>
-        </Text>
-        <Link
-          href="#"
-          mt={8}
-          display="block"
-          w="full"
-          bg="indigo.600"
-          border="1px solid transparent"
-          borderRadius="md"
-          py={2}
-          fontSize="sm"
-          fontWeight="semibold"
-          color="white"
-          textAlign="center"
-          _hover={{
-            bg: 'indigo.700'
-          }}
-        >
-          Buy {name}
-        </Link>
+          <Link
+            href={planLink}
+            mt={8}
+            display="block"
+            w="full"
+            bg={name === "Pro" ? 'var(--primary-color)' : 'var(--secondary-color)'}
+            border="1px solid transparent"
+            borderRadius="md"
+            py={4}
+            fontSize="lg"
+            textTransform="uppercase"
+            letterSpacing="1.2px"
+            fontWeight="semibold"
+            color="white"
+            textAlign="center"
+            _hover={{
+              textDecor: 'none',
+            }}
+          >
+            {planLabel}
+          </Link>
+        </Box>
       </Box>
+
       <Box pt={6} pb={8} px={6}>
         <Heading
-          as="h3"
-          fontSize="xs"
+          as="h4"
+          fontSize="sm"
           fontWeight="medium"
           color="gray.900"
           letterSpacing="wide"
@@ -96,7 +105,7 @@ export default function PricingPlanCard({
                 color="green.500"
                 aria-hidden="true"
               />
-              <Text as="span" fontSize="sm" color="gray.500">
+              <Text as="span" fontSize="md" >
                 {feature}
               </Text>
             </Stack>

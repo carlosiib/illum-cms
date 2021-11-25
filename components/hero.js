@@ -61,8 +61,8 @@ export default function Hero({ buttons, image, navigation, page }) {
             <img
               src={image.url}
               alt="Start learning with Illumidesk"
-              width={isMobile ? "230" : "540"}
-              height={isMobile ? "230" : "520"}
+              width={isMobile ? "200" : "540"}
+              height={isMobile ? "200" : "520"}
             />
           </Box>
         </Grid>

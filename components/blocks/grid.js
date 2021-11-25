@@ -27,7 +27,6 @@ export default function Grid({
         {splitLayout && (
           <Box
             as={DotsSVG}
-            color="gray.200"
             position="absolute"
             display={{ base: 'none', lg: 'block' }}
             top="100%"
