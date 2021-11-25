@@ -2,11 +2,10 @@ import { useState, useEffect } from "react"
 import { Box, Heading, Flex, Text } from "@chakra-ui/layout"
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
-import useMedia from 'hooks/useMediaQuery'
 
-export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents }) {
+export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents, isMediumDisplay }) {
 
-  const isMediumDisplay = useMedia("(max-width: 1075px)")
+  console.log("FROM PROP", isMediumDisplay)
 
   if (!howDoesItWorkContents) return null
 

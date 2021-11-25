@@ -1,10 +1,10 @@
 import { Box, Heading, Stack, Center, Grid } from '@chakra-ui/react'
-import useMediaQuery from 'hooks/useMediaQuery'
 import Button from '@/components/button'
 import Navigation from '@/components/navigation'
+import useMobile from 'hooks/useMediaQuery'
 
 export default function Hero({ buttons, image, navigation, page }) {
-  const isMobile = useMediaQuery("(max-width: 769px)")
+  const isMobile = useMobile("(max-width: 769px)")
 
   return (
     <Box >
@@ -60,9 +60,10 @@ export default function Hero({ buttons, image, navigation, page }) {
           <Box>
             <img
               src={image.url}
-              alt="Star learning with Illumidesk"
+              alt="Start learning with Illumidesk"
               width={isMobile ? "230" : "540"}
               height={isMobile ? "230" : "520"}
+              loading="lazy"
             />
           </Box>
         </Grid>
