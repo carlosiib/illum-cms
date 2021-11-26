@@ -33,7 +33,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
       page: parsedPageData,
       preview
     },
-    revalidate: 60
+    revalidate: 30,
   }
 }
 
