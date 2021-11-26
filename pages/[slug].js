@@ -6,18 +6,18 @@ import { pageQuery } from '@/lib/_queries'
 import { parsePageData } from '@/utils/_parsePageData'
 import Wrapper from '@/components/wrapper'
 import { useRouter } from 'next/router'
+import { Box } from '@chakra-ui/layout'
 
 export default function Page({ page }) {
   console.log("NOT HOME PAGE", page)
   const router = useRouter()
+
+  if (router.isFallback) {
+    <Box>Loading...</Box>
+  }
+
   return (
-    <>
-      {
-        router.isFallback ?
-          (<Box>Loading</Box>) :
-          (<Wrapper {...page} />)
-      }
-    </>
+    <Wrapper {...page} />
   )
 }
 
