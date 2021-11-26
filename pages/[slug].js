@@ -5,10 +5,20 @@ import { graphcmsClient } from '@/lib/_client'
 import { pageQuery } from '@/lib/_queries'
 import { parsePageData } from '@/utils/_parsePageData'
 import Wrapper from '@/components/wrapper'
+import { useRouter } from 'next/router'
 
 export default function Page({ page }) {
   console.log("NOT HOME PAGE", page)
-  return <Wrapper {...page} />
+  const router = useRouter()
+  return (
+    <>
+      {
+        router.isFallback ?
+          (<Box>Loading</Box>) :
+          (<Wrapper {...page} />)
+      }
+    </>
+  )
 }
 
 export async function getStaticProps({ locale, params, preview = false }) {
