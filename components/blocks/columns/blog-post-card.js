@@ -14,7 +14,7 @@ export default function BlogPostCard({
 }) {
 
   return (
-    <Flex flexDir="column" borderRadius="lg" boxShadow="lg" overflow="hidden">
+    <Flex flexDir="column" borderRadius="lg" boxShadow="lg" overflow="hidden" className="b-1" mb={'2rem'}>
       <Box flexShrink="0">
         {coverImage && (
           <Image
@@ -23,8 +23,8 @@ export default function BlogPostCard({
             alt={coverImage.title}
             title={coverImage.title}
             width={coverImage.width}
-            height={coverImage.height}
-            objectFit="cover"
+            height="400"
+            layout="intrinsic"
           />
         )}
       </Box>
@@ -58,13 +58,12 @@ export default function BlogPostCard({
           </NextLink>
         </Box>
         <Flex alignItems="center" mt={6}>
-          <Box ml={3}>
+          <Box>
             <Stack
               display="flex"
               direction="row"
               spacing={1}
               fontSize="sm"
-              color="gray.500"
             >
               <time dateTime={published}>{formattedPublished}</time>
             </Stack>

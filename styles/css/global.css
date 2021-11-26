@@ -48,7 +48,7 @@ h6 {
 
 .blog-post-card-image {
   width: 100%;
-  height: 192px;
+  object-fit: cover;
 }
 
 /* HERO */

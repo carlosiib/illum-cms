@@ -1,4 +1,4 @@
-import { Box, Grid } from '@chakra-ui/react'
+import { Box, Grid, Flex } from '@chakra-ui/react'
 
 import { blogPageQuery } from '@/lib/_queries'
 import { BlogPostCard } from '@/columns'
@@ -8,22 +8,23 @@ import { parsePageData } from '@/utils/_parsePageData'
 import { parsePostData } from '@/utils/_parsePostData'
 
 export default function BlogPage({ posts }) {
+  console.log(posts)
   return (
     <main>
-      <Box
-        maxW={{ base: 'xl', lg: '7xl' }}
-        mx="auto"
-        px={[4, 6, null, 8]}
-        py={[8, 12, null, 20]}
-      >
-        <Grid
-          gridGap={14}
-          gridTemplateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
-        >
-          {posts.map((post) => (
-            <BlogPostCard key={post.id} {...post} />
-          ))}
-        </Grid>
+      <Box py={12}>
+        <Box maxW="7xl" mx="auto" className="b-2" padding={'0 1rem'} >
+          <Flex justifyContent="space-between">
+            <Box
+              className="b-3"
+              w={'65%'}
+            >
+              {posts.map((post) => (
+                <BlogPostCard key={post.id} {...post} />
+              ))}
+            </Box>
+            <Box className="b-1" w={'25%'}>Col2</Box>
+          </Flex>
+        </Box>
       </Box>
     </main>
   )
