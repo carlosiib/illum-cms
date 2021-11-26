@@ -1,4 +1,4 @@
-import { Box, Grid, Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 import { blogPageQuery } from '@/lib/_queries'
 import { BlogPostCard } from '@/columns'
