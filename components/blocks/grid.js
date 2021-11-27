@@ -22,7 +22,7 @@ export default function Grid({
   //show your best features
   // frequently ask questions 
   return (
-    <Box overflow="hidden" bg={theme === 'LIGHT' ? 'gray.50' : 'white'} className="b-3">
+    <Box overflow="hidden" bg={theme === 'LIGHT' ? 'gray.50' : 'white'} >
       <Box pos="relative" maxW="7xl" mx="auto" py={12} px={[4, 6, null, 8]}>
         {splitLayout && (
           <Box

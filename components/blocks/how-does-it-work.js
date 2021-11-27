@@ -11,22 +11,23 @@ export default function HowDoesItWork({ title, mainImage, howDoesItWorkContents 
   if (!howDoesItWorkContents) return null
 
   return (
-    <Box maxW="7xl" mx="auto" py={12} padding={'0 1rem'} className="hdw-container b-3">
-      <Heading as="h5" mb={'4.2rem'} textAlign={'center'} fontSize={'6xl'}>{title}</Heading>
-      {isMediumDisplay ?
-        (
-          <div>
-            <MobileSkew content={howDoesItWorkContents} />
-          </div>
-        )
-        :
-        (
-          <div>
-            <DesktopSkew content={howDoesItWorkContents} mainImage={mainImage} />
-          </div>
-        )
-      }
-
+    <Box py={12} >
+      <Box maxW="7xl" mx="auto" padding={'0 1rem'} className="hdw-container">
+        <Heading as="h5" mb={'4.2rem'} textAlign={'center'} fontSize={'6xl'}>{title}</Heading>
+        {isMediumDisplay ?
+          (
+            <div>
+              <MobileSkew content={howDoesItWorkContents} />
+            </div>
+          )
+          :
+          (
+            <div>
+              <DesktopSkew content={howDoesItWorkContents} mainImage={mainImage} />
+            </div>
+          )
+        }
+      </Box>
     </Box>
   )
 }

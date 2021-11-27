@@ -12,7 +12,7 @@ export default function BlogPage({ posts }) {
   return (
     <main>
       <Box py={12}>
-        <Box maxW="7xl" mx="auto" className="b-2" padding={'0 1rem'} >
+        <Box maxW="7xl" mx="auto" padding={'0 1rem'} >
           <Flex justifyContent="space-between" className="blog-container">
             <Box
               w={'65%'}
@@ -22,7 +22,7 @@ export default function BlogPage({ posts }) {
                 <BlogPostCard key={post.id} {...post} />
               ))}
             </Box>
-            <Box w={'25%'} className="b-1 blog-sidebar">
+            <Box w={'25%'} className="blog-sidebar">
               <Box mb={3} fontSize={'2xl'} letterSpacing={'1.1px'}>
                 <Text as="h3" mb={3}>Search</Text>
                 <input type="text" placeholder="Type your keywords" />

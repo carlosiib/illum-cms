@@ -32,7 +32,7 @@ export default function NewsletterSignup({ ctaLabel, subtitle, title, image }) {
 
   return (
     <Box py={12} >
-      <Box maxW="7xl" mx="auto" position={'relative'} className="b-3">
+      <Box maxW="7xl" mx="auto" position={'relative'} >
         <Box position={'absolute'} top={'0'} left={'30%'} zIndex={'10'} className="newsletter-content">
           <Text
             fontSize={['3xl', '5xl']}

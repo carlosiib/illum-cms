@@ -12,7 +12,7 @@ export default function BlogPostCard({
 }) {
 
   return (
-    <Flex flexDir="column" borderRadius="lg" boxShadow="lg" overflow="hidden" mb={'2rem'}>
+    <Flex flexDir="column" borderRadius="lg" boxShadow="md" overflow="hidden" mb={'2rem'}>
       <Box flexShrink="0">
         {coverImage && (
           <Image

@@ -10,7 +10,7 @@ export default function FreeTrial({
 
   return (
     <Box py={12}>
-      <Box maxW="7xl" mx="auto" padding={'0 1rem'} className="free-trial-container b-3" textAlign={'center'}>
+      <Box maxW="7xl" mx="auto" padding={'0 1rem'} className="free-trial-container" textAlign={'center'}>
         <Heading as="h4" mb={6}>{freeTrialTitle}</Heading>
         <Text mb={8}>{freeTrialSubtitle}</Text>
         <Link href={freeTrialHrefLink}>

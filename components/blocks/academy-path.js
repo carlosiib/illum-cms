@@ -12,7 +12,7 @@ export default function AcademyPath({ title, academyPath }) {
 
   return (
     <Box my={12} padding={'0 1rem'}>
-      <Box maxW="7xl" mx="auto" className="b-3" >
+      <Box maxW="7xl" mx="auto" >
         <Flex justifyContent={'flex-end'} mr={'19%'} className="main-btn-container">
           <motion.button
             className="anchor-link path-main-btn"

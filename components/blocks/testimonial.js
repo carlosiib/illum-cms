@@ -20,7 +20,7 @@ export default function Testimonial({ testimonialContents }) {
 
   return (
     <Box py={12}>
-      <Box maxW="7xl" mx="auto" className="testimonial-container b-3">
+      <Box maxW="7xl" mx="auto" className="testimonial-container">
         <div className="swiper-button-prev">
           <span className="swiperPrev"></span>
         </div>

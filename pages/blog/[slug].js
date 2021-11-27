@@ -3,6 +3,7 @@ import {
   Heading,
   VisuallyHidden,
   Link,
+  Text,
   Stack
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
@@ -28,38 +29,7 @@ export default function BlogPost({ nextPost, post, previousPost }) {
         px={[4, 6, null, 8]}
         py={[8, 12, null, 20]}
       >
-        <Box as="header" pt={6} pb={{ lg: 10 }}>
-          <Stack spacing={1} textAlign="center">
-            <Stack as="dl" spacing={10}>
-              <div>
-                <VisuallyHidden as="dt">Published on</VisuallyHidden>
-                <Box
-                  as="dd"
-                  fontSize="md"
-                  lineHeight="6"
-                  fontWeight="medium"
-                  color="gray.500"
-                >
-                  <Box as="time" dateTime={post.published}>
-                    {post.formattedPublished}
-                  </Box>
-                </Box>
-              </div>
-            </Stack>
-            <div>
-              <Heading
-                as="h1"
-                fontWeight="extrabold"
-                color="gray.900"
-                lineHeight="none"
-                letterSpacing="tight"
-                fontSize={['4xl', '5xl', '6xl', '5xl', '6xl']}
-              >
-                {post.title}
-              </Heading>
-            </div>
-          </Stack>
-        </Box>
+
         <Box
           display={{ lg: 'grid' }}
           pb={{ base: 16, lg: 20 }}
@@ -85,17 +55,58 @@ export default function BlogPost({ nextPost, post, previousPost }) {
                 />
               </Box>
             )}
-            <Box maxW="none" pt={10} pb={8} color="gray.500" className="prose">
+
+            <Box as="header" pt={6} pb={{ lg: 10 }}>
+              <Stack spacing={1}>
+                <div>
+                  <Heading
+                    as="h1"
+                    fontWeight="extrabold"
+                    lineHeight="none"
+                    letterSpacing="tight"
+                    fontSize={['4xl', '5xl', '5xl', '5xl', '5xl']}
+                  >
+                    {post.title}
+                  </Heading>
+                </div>
+                <Stack as="dl" pt={4}>
+                  <div>
+                    <VisuallyHidden as="dt">Published on</VisuallyHidden>
+                    <Box
+                      as="dd"
+                      fontSize="md"
+                      lineHeight="6"
+                      fontWeight="medium"
+                      color="gray.500"
+                    >
+                      <Box as="time" dateTime={post.published}>
+                        {post.formattedPublished}
+                      </Box>
+                    </Box>
+                  </div>
+                </Stack>
+              </Stack>
+            </Box>
+
+            <Box maxW="none" pb={8} mt={2}>
+              <Text className="blog-item-excerpt">{post.excerpt}</Text>
+            </Box>
+
+            <Box
+              maxW="none"
+              pb={8}
+              fontSize={'xl'}
+              className="blog-item-content">
               <div dangerouslySetInnerHTML={{ __html: post.contentBlog.html }}></div>
             </Box>
           </Box>
+
           <Box
             as="footer"
             fontSize="sm"
             fontWeight="medium"
             lineHeight="5"
-            gridColumnStart={{ lg: '1' }}
-            gridRowStart={{ lg: '2' }}
+            paddingLeft={2}
           >
             {(nextPost || previousPost) && (
               <Stack
@@ -109,23 +120,21 @@ export default function BlogPost({ nextPost, post, previousPost }) {
                   <div>
                     <Heading
                       as="h2"
-                      fontSize="xs"
+                      fontSize="md"
                       fontWeight="medium"
                       letterSpacing="wide"
                       textTransform="uppercase"
                       lineHeight="4"
-                      color="gray.500"
+                      mb={2}
                     >
                       Next Post
                     </Heading>
                     <Box
-                      color="indigo.500"
-                      _hover={{
-                        color: 'indigo.600'
-                      }}
+                      color={'var(--primary-color)'}
+                      fontSize={'md'}
                     >
                       <NextLink href={`/blog/${nextPost.slug}`}>
-                        <a>{nextPost.title}</a>
+                        <a className="path-content-anchor">{nextPost.title}</a>
                       </NextLink>
                     </Box>
                   </div>
@@ -134,35 +143,34 @@ export default function BlogPost({ nextPost, post, previousPost }) {
                   <div>
                     <Heading
                       as="h2"
-                      fontSize="xs"
+                      fontSize="md"
                       fontWeight="medium"
                       letterSpacing="wide"
                       textTransform="uppercase"
                       lineHeight="4"
-                      color="gray.500"
+                      mb={2}
                     >
                       Previous Post
                     </Heading>
                     <Box
-                      color="indigo.500"
-                      _hover={{
-                        color: 'indigo.600'
-                      }}
+                      color={'var(--primary-color)'}
+                      fontSize={'md'}
                     >
                       <NextLink href={`/blog/${previousPost.slug}`}>
-                        <a>{previousPost.title}</a>
+                        <a className="path-content-anchor" >{previousPost.title}</a>
                       </NextLink>
                     </Box>
                   </div>
                 )}
               </Stack>
             )}
-            <Box pt={8}>
+            <Box pt={8} color={'var(--secondary-color)'}>
               <NextLink href="/blog">
                 <Link
-                  color="indigo.500"
+                  className="path-content-anchor"
+                  fontSize={'md'}
                   _hover={{
-                    color: 'indigo.600'
+                    textDecor: 'none',
                   }}
                 >
                   &larr; Back to the blog
