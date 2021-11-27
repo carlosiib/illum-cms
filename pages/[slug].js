@@ -11,7 +11,7 @@ export default function Page({ page }) {
   return <Wrapper {...page} />
 }
 
-export async function getStaticProps({ locale, params, preview = false }) {
+export async function getServerSideProps({ locale, params, preview = false }) {
   const client = graphcmsClient(preview)
 
   const { page } = await client.request(pageQuery, {
@@ -32,35 +32,34 @@ export async function getStaticProps({ locale, params, preview = false }) {
     props: {
       page: parsedPageData,
       preview
-    },
-    revalidate: 30
-  }
-}
-
-export async function getStaticPaths({ locales }) {
-  let paths = []
-
-  const client = graphcmsClient()
-
-  const { pages } = await client.request(gql`
-    {
-      pages(where: { slug_not_in: ["home", "blog"] }) {
-        slug
-      }
     }
-  `)
-
-  for (const locale of locales) {
-    paths = [
-      ...paths,
-      ...pages.map((page) => ({ params: { slug: page.slug }, locale }))
-    ]
-  }
-
-  return {
-    paths,
-    fallback: 'blocking'
   }
 }
+
+// export async function getStaticPaths({ locales }) {
+//   let paths = []
+
+//   const client = graphcmsClient()
+
+//   const { pages } = await client.request(gql`
+//     {
+//       pages(where: { slug_not_in: ["home", "blog"] }) {
+//         slug
+//       }
+//     }
+//   `)
+
+//   for (const locale of locales) {
+//     paths = [
+//       ...paths,
+//       ...pages.map((page) => ({ params: { slug: page.slug }, locale }))
+//     ]
+//   }
+
+//   return {
+//     paths,
+//     fallback: 'blocking'
+//   }
+// }
 
 Page.getLayout = getPageLayout
