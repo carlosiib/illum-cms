@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 
 import { blogPageQuery } from '@/lib/_queries'
 import { BlogPostCard } from '@/columns'
@@ -13,16 +13,30 @@ export default function BlogPage({ posts }) {
     <main>
       <Box py={12}>
         <Box maxW="7xl" mx="auto" className="b-2" padding={'0 1rem'} >
-          <Flex justifyContent="space-between">
+          <Flex justifyContent="space-between" className="blog-container">
             <Box
-              className="b-3"
               w={'65%'}
+              className="blog-posts-items"
             >
               {posts.map((post) => (
                 <BlogPostCard key={post.id} {...post} />
               ))}
             </Box>
-            <Box className="b-1" w={'25%'}>Col2</Box>
+            <Box w={'25%'} className="b-1 blog-sidebar">
+              <Box mb={3} fontSize={'2xl'} letterSpacing={'1.1px'}>
+                <Text as="h3" mb={3}>Search</Text>
+                <input type="text" placeholder="Type your keywords" />
+              </Box>
+              <Box mb={3} fontSize={'2xl'} letterSpacing={'1.1px'}>
+                <Text as="h3">Popular Post</Text>
+              </Box>
+              <Box mb={3} fontSize={'2xl'} letterSpacing={'1.1px'}>
+                <Text as="h3">Categories</Text>
+              </Box>
+              <Box mb={3} fontSize={'2xl'} letterSpacing={'1.1px'}>
+                <Text as="h3">Tags</Text>
+              </Box>
+            </Box>
           </Flex>
         </Box>
       </Box>

@@ -36,30 +36,4 @@ export async function getServerSideProps({ locale, params, preview = false }) {
   }
 }
 
-// export async function getStaticPaths({ locales }) {
-//   let paths = []
-
-//   const client = graphcmsClient()
-
-//   const { pages } = await client.request(gql`
-//     {
-//       pages(where: { slug_not_in: ["home", "blog"] }) {
-//         slug
-//       }
-//     }
-//   `)
-
-//   for (const locale of locales) {
-//     paths = [
-//       ...paths,
-//       ...pages.map((page) => ({ params: { slug: page.slug }, locale }))
-//     ]
-//   }
-
-//   return {
-//     paths,
-//     fallback: 'blocking'
-//   }
-// }
-
 Page.getLayout = getPageLayout
