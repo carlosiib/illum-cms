@@ -46,7 +46,7 @@ export default function BlogPostCard({
                 textDecor: 'none'
               }}
             >
-              <Text fontSize="xl" fontWeight="semibold" fontSize={'1.4rem'} mb={'4'}>
+              <Text fontWeight="semibold" fontSize={'1.4rem'} mb={'4'}>
                 {title}
               </Text>
               <Text mt={3} fontSize="md" mb={3}>
