@@ -10,14 +10,15 @@ export default function Hero({ buttons, image, navigation, page }) {
     <Box >
       <Navigation {...navigation} />
       <Box as="main" className="hero-container" maxW="7xl" mx="auto" mt={6} padding={'0 1rem'}>
-        <Center>
-          <Box px={[6, 12]} pr={{ xl: 16 }}>
+        <Center w={{ sm: '100%', lg: '50%' }} justifyContent={{ sm: 'center', md: 'center', lg: 'center' }}>
+          <Box px={[6, 0]} pr={{ xl: 16 }} >
             <Heading
               as="h1"
               fontSize={['4xl', '5xl', '6xl', '5xl', '6xl']}
               letterSpacing="tight"
               lineHeight="1"
               fontWeight="extrabold"
+
             >
               {page.title}
             </Heading>
@@ -37,7 +38,7 @@ export default function Hero({ buttons, image, navigation, page }) {
                 mt={10}
                 direction={['column', 'row']}
                 display={{ sm: 'flex' }}
-                justifyContent={{ sm: 'center', lg: 'flex-start' }}
+                justifyContent={{ sm: 'flex-start', lg: 'flex-start' }}
                 spacing={[3, 0]}
               >
                 {buttons.map((button) => (
@@ -56,7 +57,8 @@ export default function Hero({ buttons, image, navigation, page }) {
             )}
           </Box>
         </Center>
-        <Grid w={'100%'} placeItems={'center'}>
+
+        <Grid w={{ sm: '100%', lg: '50%' }} placeItems={{ sm: 'center', md: 'center', lg: 'flex-start' }}>
           <Box>
             <img
               src={image.url}
