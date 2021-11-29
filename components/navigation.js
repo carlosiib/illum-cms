@@ -69,6 +69,21 @@ export default function Navigation({ pages, buttons }) {
     return () => router.events.off('routeChangeStart', handleRouteChange)
   }, [router.events])
 
+
+  function handleFeatureScroll(e) {
+    e.preventDefault()
+    const featuresEl = document.getElementById("illumidesk-features")
+    let offset = 50;
+    if (!featuresEl) return
+
+    window.scrollTo({
+      behavior: "smooth",
+      top:
+        featuresEl.getBoundingClientRect().top -
+        document.body.getBoundingClientRect().top - offset
+    });
+  }
+
   // Mobile Navbar
   return (
     <Box ref={container} pos="relative">
@@ -130,6 +145,17 @@ export default function Navigation({ pages, buttons }) {
               <Box mt={6}>
                 {pages && pages.length && (
                   <Grid as="nav" gridRowGap={8}>
+
+                    <Link href="/" passHref>
+                      <ChakraLink
+                        pl={3}
+                        _focus={{ boxShadow: 'unset', textDecor: 'none', }}
+                        onClick={handleFeatureScroll}
+                      >
+                        Features
+                      </ChakraLink>
+                    </Link>
+
                     {pages.map((page) => {
                       const isActive = router.asPath.startsWith(`/${page.slug}`)
 
@@ -217,6 +243,22 @@ export default function Navigation({ pages, buttons }) {
               spacing={10}
               paddingTop={8}
             >
+              <Link href="/" passHref>
+                <ChakraLink
+                  fontSize="1rem"
+                  fontWeight="700"
+                  letterSpacing="1.1px"
+                  _hover={{
+                    textDecor: 'none',
+                    color: "var(--primary-color)"
+                  }}
+                  _focus={{ boxShadow: 'unset' }}
+                  onClick={handleFeatureScroll}
+                >
+                  Features
+                </ChakraLink>
+              </Link>
+
               {pages.map((page) => {
                 const isActive = router.asPath.startsWith(`/${page.slug}`)
 
@@ -241,9 +283,9 @@ export default function Navigation({ pages, buttons }) {
               })}
             </Stack>
           )}
+
           {buttons && buttons.length && (
             <Stack
-              as="nav"
               display={['none', null, 'flex']}
               direction="row"
               spacing={10}

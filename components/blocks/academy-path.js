@@ -11,9 +11,9 @@ export default function AcademyPath({ title, academyPath }) {
   if (!academyPath) return null
 
   return (
-    <Box my={12} padding={'0 1rem'}>
+    <Box my={12} padding={'0 1rem'} >
       <Box maxW="7xl" mx="auto" >
-        <Flex justifyContent={'flex-end'} mr={'19%'} className="main-btn-container">
+        <Flex justifyContent={'flex-end'} mr={'19%'} className="main-btn-container" id="illumidesk-features">
           <motion.button
             className="anchor-link path-main-btn"
             whileHover={{
