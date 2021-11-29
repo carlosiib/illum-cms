@@ -1,5 +1,6 @@
-import { Box, Heading, Text, Link, Stack } from '@chakra-ui/react'
-
+import { Box, Heading, Text, Stack } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { CheckIcon } from '@/icons'
 
 export default function PricingPlanCard({
@@ -55,24 +56,21 @@ export default function PricingPlanCard({
           </Text>
           <Link
             href={planLink}
-            mt={8}
-            display="block"
-            w="full"
-            bg={name === "Pro" ? 'var(--primary-color)' : 'var(--secondary-color)'}
-            border="1px solid transparent"
-            borderRadius="md"
-            py={4}
-            fontSize="lg"
-            textTransform="uppercase"
-            letterSpacing="1.2px"
-            fontWeight="semibold"
-            color="white"
-            textAlign="center"
-            _hover={{
-              textDecor: 'none',
-            }}
+            passHref
           >
-            {planLabel}
+            <motion.a
+              className={name === "Pro" ?
+                "external-anchor price-anchor bg-primary" :
+                "external-anchor price-anchor bg-secondary"}
+              whileHover={{
+                scale: 1.04,
+                transition: {
+                  type: "spring",
+                  stiffness: 1000,
+                }
+              }}>
+              {planLabel}
+            </motion.a>
           </Link>
         </Box>
       </Box>

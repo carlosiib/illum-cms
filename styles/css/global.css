@@ -378,6 +378,32 @@ h6 {
   cursor: pointer;
 }
 
+.external-anchor {
+  color: var(--white-color) !important;
+  border-radius: var(--b-radius);
+  box-shadow: var(--btn-shadow);
+  text-transform: uppercase;
+  padding: 8px 24px;
+  cursor: pointer;
+  display: block;
+}
+
+.price-anchor {
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1.1px;
+  padding: 1rem 0rem;
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+
 .failedSubmission {
   color: #e91139;
 }
