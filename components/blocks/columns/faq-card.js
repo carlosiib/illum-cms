@@ -9,7 +9,7 @@ export default function FAQCard({ title, contentFaq, questionHandler, currentQue
         fontWeight="700"
         fontSize={'1.2rem'}
         letterSpacing={'1px'}
-        color={'var(--primary-color)'}
+        color={currentQuestion === idx && 'var(--primary-color)'}
         cursor='pointer'
         onClick={() => questionHandler(idx)}
       >

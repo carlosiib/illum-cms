@@ -27,7 +27,7 @@ export default function Grid({
 
   return (
     <Box overflow="hidden" >
-      <Box pos="relative" maxW="7xl" mx="auto" py={12} px={[4, 6, null, 8]} className="b-3">
+      <Box pos="relative" maxW="7xl" mx="auto" py={12} px={[4, 6, null, 8]}>
         <Box
           position="relative"
           display={{ lg: splitLayout && 'grid' }}
