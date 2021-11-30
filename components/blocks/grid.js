@@ -1,41 +1,33 @@
-import { Box, Heading, Stack, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Box, Stack, Text } from '@chakra-ui/react'
 
 import * as Columns from '@/columns'
-import { DotsSVG } from '@/svgs'
 
 export default function Grid({
   children,
   columnComponent,
   columns,
-  gridHeadline,
   gridSubtitle,
   gridTag,
   gridTitle,
   layout = 'STACKED',
-  theme = 'WHITE',
   width = 1
 }) {
+  const [currentQuestion, setCurrentQuestion] = useState(0)
   if (!columns || !columns.length) return null
 
   const stackLayout = layout === 'STACK'
   const splitLayout = layout === 'SPLIT'
   //show your best features
-  // frequently ask questions 
-  return (
-    <Box overflow="hidden" bg={theme === 'LIGHT' ? 'gray.50' : 'white'} >
-      <Box pos="relative" maxW="7xl" mx="auto" py={12} px={[4, 6, null, 8]}>
-        {splitLayout && (
-          <Box
-            as={DotsSVG}
-            position="absolute"
-            display={{ base: 'none', lg: 'block' }}
-            top="100%"
-            right="100%"
-            left="auto"
-            transform="translate(66.66%, -75%)"
-          />
-        )}
+  // frequently ask questions
 
+  function clickHandler(id) {
+    setCurrentQuestion(id)
+  }
+
+  return (
+    <Box overflow="hidden" >
+      <Box pos="relative" maxW="7xl" mx="auto" py={12} px={[4, 6, null, 8]} className="b-3">
         <Box
           position="relative"
           display={{ lg: splitLayout && 'grid' }}
@@ -46,25 +38,12 @@ export default function Grid({
             textAlign={{ lg: stackLayout && 'center' }}
             gridColumn={{ lg: splitLayout && 'span 1 / span 1' }}
           >
-            {gridHeadline && (
-              <Heading
-                as="h2"
-                fontSize="md"
-                fontWeight="semibold"
-                color="indigo.600"
-                textTransform="uppercase"
-                letterSpacing="wide"
-              >
-                {gridHeadline}
-              </Heading>
-            )}
             <Text
               mt={2}
-              fontSize={['3xl', '4xl']}
-              fontWeight="extrabold"
-              letterSpacing="tight"
-              lineHeight="9"
-              color="gray.900"
+              mb={6}
+              as="h4"
+              fontSize={{ xsm: '1.6rem', md: '2.4rem', lg: '2.8rem' }}
+              fontWeight="900"
             >
               {gridTitle}
             </Text>
@@ -72,9 +51,8 @@ export default function Grid({
             {gridSubtitle && (
               <Box
                 mt={4}
-                fontSize="lg"
-                color="gray.500"
                 mx={{ lg: 'auto' }}
+                fontSize={{ xsm: '1.2rem' }}
               >
                 <div dangerouslySetInnerHTML={{ __html: gridSubtitle.markdown }}></div>
               </Box>
@@ -83,10 +61,10 @@ export default function Grid({
           <Stack
             as={gridTag || 'dl'}
             mt={{ base: 10, lg: splitLayout && 0 }}
-            spacing={[10, 0]}
+            spacing={[10, 6]}
             display={{ sm: 'grid' }}
             gridColumnGap={{ sm: 8 }}
-            gridRowGap={{ sm: 10 }}
+            gridRowGap={{ sm: 4 }}
             gridColumn={{ lg: 'span 2 / span 2' }}
             gridTemplateColumns={{
               base: 'repeat(1, 1fr)',
@@ -95,13 +73,19 @@ export default function Grid({
           >
             {children
               ? children()
-              : columns.map((column) => {
+              : columnComponent === 'FAQCard' && columns.map((column, idx) => {
                 const Component =
                   Columns[columnComponent] || Columns[column.__typename]
 
                 if (!Component) return null
 
-                return <Component key={column.id} {...column} />
+                return (
+                  <Component
+                    key={column.id}
+                    idx={idx}
+                    questionHandler={(id) => clickHandler(id)}
+                    currentQuestion={currentQuestion}
+                    {...column} />)
               })}
           </Stack>
         </Box>
