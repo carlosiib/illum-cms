@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Text } from '@chakra-ui/react'
+import { Box, Container, Heading } from '@chakra-ui/react'
 
 import { getSiteLayout, Iubenda } from '@/layout'
 import Hero from '@/components/hero'

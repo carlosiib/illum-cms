@@ -1,5 +1,3 @@
-import { gql } from 'graphql-request'
-
 import { getPageLayout } from '@/layout'
 import { graphcmsClient } from '@/lib/_client'
 import { pageQuery } from '@/lib/_queries'
