@@ -1,13 +1,13 @@
-import { Box, Container, Heading } from '@chakra-ui/react'
+import { Box, Container, Heading, Text } from '@chakra-ui/react'
 
-import { getSiteLayout } from '@/layout'
+import { getSiteLayout, Iubenda } from '@/layout'
 import Hero from '@/components/hero'
 import * as Marketing from '@/marketing'
 import Navigation from '@/components/navigation'
 import SEO from '@/components/seo'
 
 export default function PageLayout({ children, page }) {
-  console.log("page", page)
+  console.log("internal page", page)
 
   const pageNewsletter = page?.marketing?.find(
     (block) => block.__typename === 'Newsletter'
@@ -18,11 +18,13 @@ export default function PageLayout({ children, page }) {
       {page?.seo && <SEO {...page.seo} />}
 
       {page?.hero ? (
-        <Hero {...page.hero} navigation={page.navigation} page={page} />
+        <>
+          <Hero {...page.hero} navigation={page.navigation} page={page} />
+        </>
       ) : (
         <>
           <Navigation {...page?.navigation} />
-          <Box mx="auto" pt={24} px={[4, 6, null, 8]}>
+          <Box mx="auto" pt={24} px={[4, 6, null, 8]} className="b-2">
             <Box
               display={[null, 'flex']}
               flexDir={[null, 'column']}
@@ -34,7 +36,6 @@ export default function PageLayout({ children, page }) {
                 fontSize="5xl"
                 lineHeight="none"
                 fontWeight="extrabold"
-                color="gray.900"
               >
                 {page?.title}
               </Heading>
@@ -43,14 +44,15 @@ export default function PageLayout({ children, page }) {
                   mt={5}
                   p={0}
                   centerContent
-                  color="gray.500"
                   lineHeight="tall"
                   fontSize="xl"
                 >
                   <div dangerouslySetInnerHTML={{ __html: page.subtitle.markdown }}></div>
                 </Container>
               )}
+              <Iubenda />
             </Box>
+
           </Box>
         </>
       )}

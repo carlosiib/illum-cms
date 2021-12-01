@@ -28,6 +28,8 @@ export default class MyDocument extends Document {
             }}
           />
           <script src="scripts/driftor.js"></script>
+          <script src="scripts/iubenda.js"></script>
+          <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" async></script>
         </Head>
         <body>
           <Main />
