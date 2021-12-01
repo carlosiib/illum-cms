@@ -219,7 +219,6 @@ export default function Navigation({ pages, buttons }) {
                   alt="Illumidesk LLC"
                   width="198"
                   height="80"
-                  loading="lazy"
                 />
               </a>
             </Link>

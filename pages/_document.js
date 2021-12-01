@@ -27,6 +27,7 @@ export default class MyDocument extends Document {
           `,
             }}
           />
+          <script src="scripts/driftor.js"></script>
         </Head>
         <body>
           <Main />
