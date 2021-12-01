@@ -8,6 +8,7 @@ import SEO from '@/components/seo'
 
 export default function PageLayout({ children, page }) {
   console.log("internal page", page)
+  console.log("page", page)
 
   const pageNewsletter = page?.marketing?.find(
     (block) => block.__typename === 'Newsletter'
@@ -24,7 +25,7 @@ export default function PageLayout({ children, page }) {
       ) : (
         <>
           <Navigation {...page?.navigation} />
-          <Box mx="auto" pt={24} px={[4, 6, null, 8]} className="b-2">
+          <Box mx="auto" pt={24} px={[4, 6, null, 8]} >
             <Box
               display={[null, 'flex']}
               flexDir={[null, 'column']}
@@ -52,9 +53,21 @@ export default function PageLayout({ children, page }) {
               )}
               <Iubenda />
             </Box>
-
           </Box>
         </>
+      )}
+
+      {page?.pageContent && (
+        <Box py={12}>
+          <Box
+            maxW="7xl"
+            mx="auto"
+            padding={'0 1rem'}
+            lineHeight="tall"
+            fontSize={{ sm: '1rem', md: '1.1rem', lg: '1.2rem' }}>
+            <div dangerouslySetInnerHTML={{ __html: page.pageContent.html }}></div>
+          </Box>
+        </Box>
       )}
 
       <div>

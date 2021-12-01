@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Box } from '@chakra-ui/layout'
 
 export default function Iubenda() {
 
@@ -11,10 +12,11 @@ export default function Iubenda() {
     }
     getData()
   }, [])
+
   return (
-    <div>
-      IUDEBNDA FETCH
-    </div>
+    <Box type='hidden'>
+
+    </Box>
   )
 }
 
