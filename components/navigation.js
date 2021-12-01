@@ -28,7 +28,6 @@ const transitionStyles = {
 }
 
 export default function Navigation({ pages, buttons }) {
-  //console.log(buttons)
   const container = useRef(null)
   const router = useRouter()
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
@@ -83,6 +82,15 @@ export default function Navigation({ pages, buttons }) {
         document.body.getBoundingClientRect().top - offset
     });
   }
+
+  //Excluded Links
+  const filterNavLinks = pages.filter(p =>
+    p.navigationLabel !== "Cookie" &&
+    p.navigationLabel !== "Docs" &&
+    p.navigationLabel !== "Privacy" &&
+    p.navigationLabel !== "Terms" &&
+    p.navigationLabel !== "Security" &&
+    p.navigationLabel !== "Community")
 
   // Mobile Navbar
   return (
@@ -156,7 +164,7 @@ export default function Navigation({ pages, buttons }) {
                       </ChakraLink>
                     </Link>
 
-                    {pages.map((page) => {
+                    {filterNavLinks.map((page) => {
                       const isActive = router.asPath.startsWith(`/${page.slug}`)
 
                       return (
@@ -259,7 +267,7 @@ export default function Navigation({ pages, buttons }) {
                 </ChakraLink>
               </Link>
 
-              {pages.map((page) => {
+              {filterNavLinks.map((page) => {
                 const isActive = router.asPath.startsWith(`/${page.slug}`)
 
                 return (

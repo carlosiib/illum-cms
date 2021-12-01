@@ -2,6 +2,7 @@ import { getSiteLayout } from '@/layout'
 import Navigation from '@/components/navigation'
 
 export default function ContentLayout({ children, page }) {
+  console.log("navigation page", page)
   return (
     <>
       <Navigation {...(page?.navigation && { ...page.navigation })} />
