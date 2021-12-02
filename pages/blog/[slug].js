@@ -17,7 +17,7 @@ import { parsePostData } from '@/utils/_parsePostData'
 import SEO from '@/components/seo'
 
 export default function BlogPost({ nextPost, post, previousPost }) {
-  console.log("single post object", post)
+
   return (
     <>
       <SEO {...post.seo} />
@@ -204,7 +204,7 @@ export async function getStaticProps({ locale, params, preview = false }) {
   const previousPost = allPosts[postIndex - 1] || null
 
   const parsedPostData = await parsePostData(post)
-  console.log("POST data", post)
+
 
   return {
     props: {

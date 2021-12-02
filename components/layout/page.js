@@ -7,8 +7,7 @@ import Navigation from '@/components/navigation'
 import SEO from '@/components/seo'
 
 export default function PageLayout({ children, page }) {
-  console.log("internal page", page)
-  console.log("page", page)
+  //console.log("internal page", page)
 
   const pageNewsletter = page?.marketing?.find(
     (block) => block.__typename === 'Newsletter'

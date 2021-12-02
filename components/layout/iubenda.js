@@ -8,7 +8,7 @@ export default function Iubenda() {
     async function getData() {
       const req = await fetch('/api/iubenda')
       const res = await req.json()
-      console.log("iubenda res", res)
+      //console.log("iubenda res", res)
     }
     getData()
   }, [])

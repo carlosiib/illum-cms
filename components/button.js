@@ -14,7 +14,6 @@ const linkDefaultStyles = {
 }
 
 export default function Button({ href, label, theme }) {
-  // console.log(label)
   if (!href || !label) return null
 
   if (href.includes('http')) {

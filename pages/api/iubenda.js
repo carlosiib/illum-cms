@@ -1,7 +1,7 @@
 
 export default async (req, res) => {
-  console.log("req", req)
-  console.log("res", res)
+  //console.log("req", req)
+  //console.log("res", res)
 
 
   try {

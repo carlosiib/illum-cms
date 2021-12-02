@@ -2,8 +2,6 @@ import { Flex, Box } from '@chakra-ui/react'
 import { CheckIcon } from '@/icons'
 
 export default function FeatureCheck({ title, contentFeature }) {
-  //console.log(contentFeature)
-  //feature page
   return (
     <Flex className="b-3">
       <Box

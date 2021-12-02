@@ -8,7 +8,7 @@ import { parsePageData } from '@/utils/_parsePageData'
 import { parsePostData } from '@/utils/_parsePostData'
 
 export default function BlogPage({ posts }) {
-  console.log(posts)
+
   return (
     <main>
       <Box py={12}>
