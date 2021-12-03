@@ -1,6 +1,6 @@
 import { Box, Container, Heading } from '@chakra-ui/react'
 
-import { getSiteLayout, Iubenda } from '@/layout'
+import { Drift, getSiteLayout, Iubenda } from '@/layout'
 import Hero from '@/components/hero'
 import * as Marketing from '@/marketing'
 import Navigation from '@/components/navigation'

@@ -25,5 +25,13 @@ function LoadDriftWidget() {
 };
 
 window.addEventListener("load", function () {
-  LoadDriftWidget()
+  const driftFacade = document.querySelector("#drift-widget")
+
+  if (!driftFacade) return null
+
+  driftFacade.onclick = function () {
+    driftFacade.style.display = "none";
+    LoadDriftWidget()
+  };
+
 });

@@ -1,7 +1,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { DefaultSeo } from 'next-seo'
 
-import { SiteLayout } from '@/layout'
+import { Drift, SiteLayout } from '@/layout'
 
 import Head from 'next/head'
 import { defaultSEO } from '../next-seo.config'
@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <DefaultSeo {...defaultSEO} />
       {getLayout(<Component {...pageProps} />)}
+      <Drift />
     </ChakraProvider>
   )
 }
