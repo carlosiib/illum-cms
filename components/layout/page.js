@@ -1,13 +1,36 @@
-import { Box, Container, Heading } from '@chakra-ui/react'
+import { useState, useEffect } from 'react'
+import { Box, Container, Heading, Flex } from '@chakra-ui/react'
 
 import { Drift, getSiteLayout, Iubenda } from '@/layout'
 import Hero from '@/components/hero'
 import * as Marketing from '@/marketing'
 import Navigation from '@/components/navigation'
 import SEO from '@/components/seo'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 export default function PageLayout({ children, page }) {
   //console.log("internal page", page)
+  const [courses, setCourses] = useState(["Course 1", "Course 2", "Course 3", "Course 4", "Course 5"])
+
+  const [winReady, setwinReady] = useState(false);
+  useEffect(() => {
+    setwinReady(true);
+
+  }, []);
+
+  function reOrder(result) {
+    const { source, destination } = result
+
+    if (!destination) return;
+
+    //different column drag provider
+    if (source.index === destination.index && source.droppableId === destination.droppableId) return;
+
+    const items = Array.from(courses)
+    const [reorderItems] = items.splice(source.index, 1)
+    items.splice(destination.index, 0, reorderItems)
+    setCourses(items)
+  }
 
   const pageNewsletter = page?.marketing?.find(
     (block) => block.__typename === 'Newsletter'
@@ -68,6 +91,69 @@ export default function PageLayout({ children, page }) {
           </Box>
         </Box>
       )}
+
+      {page?.title === "Drag N Drop"
+        && winReady
+        ?
+        <Box py={12}>
+          <Flex
+            className="b-3"
+            maxW="7xl"
+            mx="auto"
+            padding={'0 1rem'}
+            flexDirection={{ xsm: 'column', md: 'column', lg: 'row' }}>
+            <Box
+              className="b-1"
+              w={{ xsm: '100%', md: '100%', lg: '20%' }}>
+              <button>Add course</button>
+            </Box>
+            <DragDropContext onDragEnd={reOrder}>
+
+              <Box
+                className="b-1"
+                w={{ xsm: '100%', md: '100%', lg: '80%' }}
+                padding={'1rem'}
+
+              >
+                <Droppable droppableId="courses">
+                  {(droppableProvided) => (
+                    <Box
+                      display='flex'
+                      flexDirection='column'
+                      justifyContent='space-between'
+                      minH='30vh'
+                      {...droppableProvided.droppableProps}
+                      ref={droppableProvided.innerRef}
+                    >
+                      {
+                        courses.map((c, idx) => (
+                          <Draggable draggableId={`${idx}`} index={idx} key={idx}>
+                            {(draggableProvided) => (
+                              <Box
+                                border='1px solid black'
+                                padding='0.6rem .8rem'
+                                {...draggableProvided.draggableProps}
+                                ref={draggableProvided.innerRef}
+                                {...draggableProvided.dragHandleProps}
+                              >
+                                {c}
+                              </Box>
+                            )}
+                          </Draggable>
+                        ))
+                      }
+                      {droppableProvided.placeholder}
+                    </Box>
+                  )}
+                </Droppable>
+              </Box>
+            </DragDropContext>
+          </Flex>
+        </Box>
+        :
+        null
+
+      }
 
       <div>
         {children}
