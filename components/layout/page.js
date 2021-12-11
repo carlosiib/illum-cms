@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Box, Container, Heading, Flex } from '@chakra-ui/react'
+import { Box, Heading, Container, Flex } from '@chakra-ui/react'
 
 import { Drift, getSiteLayout, Iubenda } from '@/layout'
 import Hero from '@/components/hero'
@@ -8,28 +8,76 @@ import Navigation from '@/components/navigation'
 import SEO from '@/components/seo'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
+
+
+
 export default function PageLayout({ children, page }) {
   //console.log("internal page", page)
-  const [courses, setCourses] = useState(["Course 1", "Course 2", "Course 3", "Course 4", "Course 5"])
+
+  const itemsFromBackend = [
+    { id: "1", content: "Header" },
+    { id: "2", content: "Body" },
+    { id: "3", content: "Footer" },
+  ];
+
+  const columnsFromBackend = {
+    ["web"]: {
+      name: "Blocks",
+      items: itemsFromBackend
+    },
+    ["layout"]: {
+      name: "Layout",
+      items: []
+    }
+  };
+
+  const [columns, setColumns] = useState(columnsFromBackend)
 
   const [winReady, setwinReady] = useState(false);
+
+
   useEffect(() => {
     setwinReady(true);
 
   }, []);
 
-  function reOrder(result) {
+
+  function onDragEnd(result, columns, setColumns) {
+    if (!result.destination) return;
     const { source, destination } = result
 
-    if (!destination) return;
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = columns[source.droppableId]
+      const destColumn = columns[destination.droppableId]
+      const sourceItems = [...sourceColumn.items]
+      const destItems = [...destColumn.items]
+      const [removed] = sourceItems.splice(source.index, 1)
+      destItems.splice(destination.index, 0, removed)
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems
+        }
+      })
+    } else {
+      const column = columns[source.droppableId]
+      const copiedItems = [...column.items]
+      const [removed] = copiedItems.splice(source.index, 1)
+      copiedItems.splice(destination.index, 0, removed)
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems
+        }
+      })
+    }
 
-    //different column drag provider
-    if (source.index === destination.index && source.droppableId === destination.droppableId) return;
-
-    const items = Array.from(courses)
-    const [reorderItems] = items.splice(source.index, 1)
-    items.splice(destination.index, 0, reorderItems)
-    setCourses(items)
   }
 
   const pageNewsletter = page?.marketing?.find(
@@ -101,58 +149,65 @@ export default function PageLayout({ children, page }) {
             maxW="7xl"
             mx="auto"
             padding={'0 1rem'}
-            flexDirection={{ xsm: 'column', md: 'column', lg: 'row' }}>
-            <Box
-              className="b-1"
-              w={{ xsm: '100%', md: '100%', lg: '20%' }}>
-              <button>Add course</button>
-            </Box>
-            <DragDropContext onDragEnd={reOrder}>
+            flexDirection={{ xsm: 'column', md: 'column', lg: 'row' }}
+            justifyContent='center'
+            alignItems='center'
+            minH='40vh'>
+            <DragDropContext onDragEnd={(result => onDragEnd(result, columns, setColumns))}>
+              {Object.entries(columns).map(([id, column]) => {
+                return (
 
-              <Box
-                className="b-1"
-                w={{ xsm: '100%', md: '100%', lg: '80%' }}
-                padding={'1rem'}
+                  <Box mx={{ xsm: '0', md: '0', lg: '1rem' }}>
+                    <Heading as='h2' textAlign='center'>{column.name}</Heading>
+                    <Droppable droppableId={id} key={id}>
+                      {(provided, snapshot) => {
+                        return (
+                          <Box
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                            padding='2rem'
+                            width='250px'
+                            minH='300px'
+                            backgroundColor={snapshot.isDraggingOver ? "lightblue" : "lightgrey"}
+                          >
+                            {column.items.map((item, index) => {
+                              return (
+                                <Draggable key={item.id} draggableId={item.id} index={index}>
+                                  {(provided, snapshot) => {
+                                    return (
+                                      <Box
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        userSelect='none'
+                                        padding='1rem'
+                                        margin='0 0 8px 0'
+                                        minH='50px'
+                                        color='white'
+                                        backgroundColor={snapshot.isDragging ? "var(--secondary-color)" : "var(--primary-color)"}
+                                        style={{ ...provided.draggableProps.style }}
+                                      >
+                                        {item.content}
+                                      </Box>
+                                    )
+                                  }}
+                                </Draggable>
+                              )
+                            })}
+                            {provided.placeholder}
+                          </Box>
+                        )
+                      }}
+                    </Droppable>
+                  </Box>
 
-              >
-                <Droppable droppableId="courses">
-                  {(droppableProvided) => (
-                    <Box
-                      display='flex'
-                      flexDirection='column'
-                      justifyContent='space-between'
-                      minH='30vh'
-                      {...droppableProvided.droppableProps}
-                      ref={droppableProvided.innerRef}
-                    >
-                      {
-                        courses.map((c, idx) => (
-                          <Draggable draggableId={`${idx}`} index={idx} key={idx}>
-                            {(draggableProvided) => (
-                              <Box
-                                border='1px solid black'
-                                padding='0.6rem .8rem'
-                                {...draggableProvided.draggableProps}
-                                ref={draggableProvided.innerRef}
-                                {...draggableProvided.dragHandleProps}
-                              >
-                                {c}
-                              </Box>
-                            )}
-                          </Draggable>
-                        ))
-                      }
-                      {droppableProvided.placeholder}
-                    </Box>
-                  )}
-                </Droppable>
-              </Box>
+                )
+              })}
             </DragDropContext>
           </Flex>
         </Box>
         :
         null
-
       }
 
       <div>
