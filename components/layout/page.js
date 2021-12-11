@@ -156,8 +156,7 @@ export default function PageLayout({ children, page }) {
             <DragDropContext onDragEnd={(result => onDragEnd(result, columns, setColumns))}>
               {Object.entries(columns).map(([id, column]) => {
                 return (
-
-                  <Box mx={{ xsm: '0', md: '0', lg: '1rem' }}>
+                  <Box mx={{ xsm: '0', md: '0', lg: '1rem' }} key={id}>
                     <Heading as='h2' textAlign='center'>{column.name}</Heading>
                     <Droppable droppableId={id} key={id}>
                       {(provided, snapshot) => {
