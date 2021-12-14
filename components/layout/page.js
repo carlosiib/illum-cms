@@ -9,40 +9,95 @@ import SEO from '@/components/seo'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 
-
-
 export default function PageLayout({ children, page }) {
   //console.log("internal page", page)
 
   const itemsFromBackend = [
-    { id: "1", content: "Header" },
-    { id: "2", content: "Body" },
-    { id: "3", content: "Footer" },
+    { id: "Hero", content: "Hero", c_id: "123-hero" },
+    { id: "Body", content: "Body", c_id: "123-body" },
+    { id: "Footer", content: "Footer", c_id: "123-footer" },
   ];
 
   const columnsFromBackend = {
-    ["web"]: {
+    ["Blocks"]: {
       name: "Blocks",
       items: itemsFromBackend
     },
-    ["layout"]: {
+    ["Layout"]: {
       name: "Layout",
       items: []
     }
   };
 
   const [columns, setColumns] = useState(columnsFromBackend)
+  const [draggableActions, setDraggableActions] = useState({})
 
   const [winReady, setwinReady] = useState(false);
+
 
 
   useEffect(() => {
     setwinReady(true);
 
+    const localColumns = localStorage.getItem('columns')
+    if (!localColumns) return;
+    setColumns(JSON.parse(localColumns))
+
   }, []);
+
+  useEffect(() => {
+
+    const parsedCols = JSON.stringify(columns)
+    localStorage.setItem('columns', parsedCols);
+
+    const { source, destination, draggableId } = draggableActions
+
+    const checkDestination = async (source = "", destination = "", draggableId = "") => {
+      if (source.droppableId === "Blocks" && destination.droppableId === "Layout" && draggableId === "Hero") {
+        console.log("from blocks to layout")
+
+        try {
+          const payload = { source: "Blocks", destination: "Layout" }
+
+          const req = await fetch('/api/mutations', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          })
+          const res = await req.json()
+          console.log("mutations res front", res)
+
+        } catch (error) {
+          console.log("ERROR", error)
+        }
+      }
+
+      if (source.droppableId === "Layout" && destination.droppableId === "Blocks" && draggableId === "Hero") {
+        console.log("from layout to blocks")
+
+        try {
+          const payload = { source: "Layout", destination: "Blocks" }
+
+          const req = await fetch('/api/mutations', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          })
+          const res = await req.json()
+          console.log("mutations res front", res)
+        } catch (error) {
+          console.log("ERROR", error)
+        }
+      }
+
+    }
+    checkDestination(source, destination, draggableId)
+
+
+
+  }, [columns])
 
 
   function onDragEnd(result, columns, setColumns) {
+    setDraggableActions(result)
     if (!result.destination) return;
     const { source, destination } = result
 
@@ -64,6 +119,7 @@ export default function PageLayout({ children, page }) {
           items: destItems
         }
       })
+
     } else {
       const column = columns[source.droppableId]
       const copiedItems = [...column.items]
@@ -77,12 +133,15 @@ export default function PageLayout({ children, page }) {
         }
       })
     }
-
   }
+
+
 
   const pageNewsletter = page?.marketing?.find(
     (block) => block.__typename === 'Newsletter'
   )
+
+
 
   return (
     <>
@@ -153,7 +212,9 @@ export default function PageLayout({ children, page }) {
             justifyContent='center'
             alignItems='center'
             minH='40vh'>
-            <DragDropContext onDragEnd={(result => onDragEnd(result, columns, setColumns))}>
+            <DragDropContext
+              onDragEnd={(result => onDragEnd(result, columns, setColumns))}
+            >
               {Object.entries(columns).map(([id, column]) => {
                 return (
                   <Box mx={{ xsm: '0', md: '0', lg: '1rem' }} key={id}>
