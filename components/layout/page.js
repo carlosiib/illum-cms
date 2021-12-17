@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Box, Heading, Container, Flex } from '@chakra-ui/react'
+import { Box, Heading, Container, Flex, Button } from '@chakra-ui/react'
 
-import { Drift, getSiteLayout, Iubenda } from '@/layout'
+import { getSiteLayout, Iubenda } from '@/layout'
 import Hero from '@/components/hero'
+import Modal from '@/components/modal'
 import * as Marketing from '@/marketing'
 import Navigation from '@/components/navigation'
 import SEO from '@/components/seo'
@@ -13,9 +14,9 @@ export default function PageLayout({ children, page }) {
   //console.log("internal page", page)
 
   const itemsFromBackend = [
-    { id: "Hero", content: "Hero", c_id: "123-hero" },
-    { id: "Body", content: "Body", c_id: "123-body" },
-    { id: "Footer", content: "Footer", c_id: "123-footer" },
+    { id: "Hero", content: "Hero" },
+    { id: "Body", content: "Body" },
+    { id: "Footer", content: "Footer" },
   ];
 
   const columnsFromBackend = {
@@ -32,12 +33,12 @@ export default function PageLayout({ children, page }) {
   const [columns, setColumns] = useState(columnsFromBackend)
   const [draggableActions, setDraggableActions] = useState({})
 
-  const [winReady, setwinReady] = useState(false);
-
+  const [winReady, setWinReady] = useState(false);
+  const [showModal, setShowModal] = useState(false)
 
 
   useEffect(() => {
-    setwinReady(true);
+    setWinReady(true);
 
     const localColumns = localStorage.getItem('columns')
     if (!localColumns) return;
@@ -53,17 +54,19 @@ export default function PageLayout({ children, page }) {
     const { source, destination, draggableId } = draggableActions
 
     const checkDestination = async (source = "", destination = "", draggableId = "") => {
+
       if (source.droppableId === "Blocks" && destination.droppableId === "Layout" && draggableId === "Hero") {
         console.log("from blocks to layout")
 
         try {
           const payload = { source: "Blocks", destination: "Layout" }
 
-          const req = await fetch('/api/mutations', {
+          const req = await fetch('/api/mutations/publish', {
             method: 'POST',
             body: JSON.stringify(payload)
           })
           const res = await req.json()
+
           console.log("mutations res front", res)
 
         } catch (error) {
@@ -77,7 +80,7 @@ export default function PageLayout({ children, page }) {
         try {
           const payload = { source: "Layout", destination: "Blocks" }
 
-          const req = await fetch('/api/mutations', {
+          const req = await fetch('/api/mutations/publish', {
             method: 'POST',
             body: JSON.stringify(payload)
           })
@@ -200,72 +203,104 @@ export default function PageLayout({ children, page }) {
       )}
 
       {page?.title === "Drag N Drop"
-        && winReady
+        &&
+        winReady
         ?
-        <Box py={12}>
-          <Flex
-            className="b-3"
-            maxW="7xl"
-            mx="auto"
-            padding={'0 1rem'}
-            flexDirection={{ xsm: 'column', md: 'column', lg: 'row' }}
-            justifyContent='center'
-            alignItems='center'
-            minH='40vh'>
-            <DragDropContext
-              onDragEnd={(result => onDragEnd(result, columns, setColumns))}
-            >
-              {Object.entries(columns).map(([id, column]) => {
-                return (
-                  <Box mx={{ xsm: '0', md: '0', lg: '1rem' }} key={id}>
-                    <Heading as='h2' textAlign='center'>{column.name}</Heading>
-                    <Droppable droppableId={id} key={id}>
-                      {(provided, snapshot) => {
-                        return (
-                          <Box
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                            padding='2rem'
-                            width='250px'
-                            minH='300px'
-                            backgroundColor={snapshot.isDraggingOver ? "lightblue" : "lightgrey"}
-                          >
-                            {column.items.map((item, index) => {
-                              return (
-                                <Draggable key={item.id} draggableId={item.id} index={index}>
-                                  {(provided, snapshot) => {
-                                    return (
-                                      <Box
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        userSelect='none'
-                                        padding='1rem'
-                                        margin='0 0 8px 0'
-                                        minH='50px'
-                                        color='white'
-                                        backgroundColor={snapshot.isDragging ? "var(--secondary-color)" : "var(--primary-color)"}
-                                        style={{ ...provided.draggableProps.style }}
-                                      >
-                                        {item.content}
-                                      </Box>
-                                    )
-                                  }}
-                                </Draggable>
-                              )
-                            })}
-                            {provided.placeholder}
-                          </Box>
-                        )
-                      }}
-                    </Droppable>
-                  </Box>
+        <div>
+          <Modal
+            winReady={winReady}
+            showModal={showModal}
+            onClose={() => setShowModal(false)}
 
-                )
-              })}
-            </DragDropContext>
-          </Flex>
-        </Box>
+          />
+          <Box py={12}>
+            <Flex
+              className="b-3"
+              maxW="7xl"
+              mx="auto"
+              padding={'0 1rem'}
+              flexDirection={{ xsm: 'column', md: 'column', lg: 'row' }}
+              justifyContent='center'
+              alignItems='center'
+              minH='40vh'>
+              <DragDropContext
+                onDragEnd={(result => onDragEnd(result, columns, setColumns))}
+              >
+                {Object.entries(columns).map(([id, column]) => {
+                  return (
+                    <Box mx={{ xsm: '0', md: '0', lg: '1rem' }} key={id}>
+                      <Heading as='h2' textAlign='center'>{column.name}</Heading>
+                      <Droppable droppableId={id} key={id}>
+                        {(provided, snapshot) => {
+                          return (
+                            <Box
+                              {...provided.droppableProps}
+                              ref={provided.innerRef}
+                              padding='2rem'
+                              width='250px'
+                              minH='300px'
+                              backgroundColor={snapshot.isDraggingOver ? "lightblue" : "lightgrey"}
+                            >
+                              {column.items.map((item, index) => {
+                                return (
+                                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                                    {(provided, snapshot) => {
+                                      return (
+                                        <Box
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                          userSelect='none'
+                                          padding='1rem'
+                                          margin='0 0 8px 0'
+                                          minH='50px'
+                                          color='white'
+                                          backgroundColor={snapshot.isDragging ? "var(--secondary-color)" : "var(--primary-color)"}
+                                          style={{ ...provided.draggableProps.style }}
+                                          display='flex'
+                                          flexDir='row'
+                                          justifyContent='space-between'
+                                          alignItems='center'
+                                        >
+                                          <div>{item.content}</div>
+                                          <div>
+                                            {column.name === "Layout"
+                                              &&
+                                              item.content === "Hero"
+                                              &&
+                                              <Button
+                                                backgroundColor='var(--secondary-color)'
+                                                _hover={{
+                                                  bg: 'var(--secondary-color)'
+                                                }}
+                                                _focus={{ boxShadow: 'unset' }}
+                                                _active={{ bg: 'var(--secondary-color)' }}
+                                                letterSpacing='1.1px'
+                                                zIndex='10'
+                                                onClick={() => setShowModal(true)}>
+                                                Edit
+                                              </Button>
+                                            }
+                                          </div>
+                                        </Box>
+                                      )
+                                    }}
+                                  </Draggable>
+                                )
+                              })}
+                              {provided.placeholder}
+                            </Box>
+                          )
+                        }}
+                      </Droppable>
+                    </Box>
+
+                  )
+                })}
+              </DragDropContext>
+            </Flex>
+          </Box>
+        </div>
         :
         null
       }
